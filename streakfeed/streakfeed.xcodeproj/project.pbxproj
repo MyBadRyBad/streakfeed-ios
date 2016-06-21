@@ -17,6 +17,8 @@
 		6EC73F3F1D18BB9D00224D46 /* streakfeedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */; };
 		6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F4E1D18BE9F00224D46 /* RootViewController.m */; };
 		6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */; };
+		6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5A1D18C11E00224D46 /* ModelHelper.m */; };
+		6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5C1D18C11E00224D46 /* RESTHelper.m */; };
 		8221BE5928D6B55B8918B540 /* libPods-streakfeed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */; };
 		D55C18DBB2A457EF251FD52A /* libPods-streakfeedUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */; };
 /* End PBXBuildFile section */
@@ -63,6 +65,10 @@
 		6EC73F551D18BF5F00224D46 /* kConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kConstants.h; path = constants/kConstants.h; sourceTree = "<group>"; };
 		6EC73F561D18BF5F00224D46 /* kErrorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kErrorConstants.h; path = constants/kErrorConstants.h; sourceTree = "<group>"; };
 		6EC73F571D18BF5F00224D46 /* kRESTConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kRESTConstants.h; path = constants/kRESTConstants.h; sourceTree = "<group>"; };
+		6EC73F591D18C11E00224D46 /* ModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelHelper.h; path = Helpers/ModelHelper.h; sourceTree = "<group>"; };
+		6EC73F5A1D18C11E00224D46 /* ModelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelHelper.m; path = Helpers/ModelHelper.m; sourceTree = "<group>"; };
+		6EC73F5B1D18C11E00224D46 /* RESTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESTHelper.h; path = Helpers/RESTHelper.h; sourceTree = "<group>"; };
+		6EC73F5C1D18C11E00224D46 /* RESTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RESTHelper.m; path = Helpers/RESTHelper.m; sourceTree = "<group>"; };
 		7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeed.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB27FBC62969841A2921CA1 /* Pods-streakfeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeed/Pods-streakfeed.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0444381AF87E9CEC1B5139 /* Pods-streakfeedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedUITests/Pods-streakfeedUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +130,9 @@
 		6EC73F181D18BB9C00224D46 /* streakfeed */ = {
 			isa = PBXGroup;
 			children = (
+				6EC73F5F1D18C12A00224D46 /* Models */,
 				6EC73F541D18BF5100224D46 /* Constants */,
+				6EC73F581D18C0D400224D46 /* Helpers */,
 				6EC73F4C1D18BE7700224D46 /* AppDelegate */,
 				6EC73F531D18BED000224D46 /* ViewControllers */,
 				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
@@ -190,6 +198,24 @@
 				6EC73F571D18BF5F00224D46 /* kRESTConstants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		6EC73F581D18C0D400224D46 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6EC73F591D18C11E00224D46 /* ModelHelper.h */,
+				6EC73F5A1D18C11E00224D46 /* ModelHelper.m */,
+				6EC73F5B1D18C11E00224D46 /* RESTHelper.h */,
+				6EC73F5C1D18C11E00224D46 /* RESTHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		6EC73F5F1D18C12A00224D46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		915574B74E9E50D94037508A /* Frameworks */ = {
@@ -478,8 +504,10 @@
 			files = (
 				6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */,
 				6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */,
+				6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */,
 				6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */,
 				6EC73F1B1D18BB9C00224D46 /* main.m in Sources */,
+				6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
