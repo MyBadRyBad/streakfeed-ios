@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  streakfeed
 //
 //  Created by Ryan Badilla on 6/20/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface RootViewController : UIViewController
 
 @end
-

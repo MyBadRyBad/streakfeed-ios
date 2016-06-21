@@ -10,12 +10,13 @@
 		2673C162B6545EBDE84C685F /* libPods-streakfeedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C1E8E376A18E6B1E47E103 /* libPods-streakfeedTests.a */; };
 		6EC73F1B1D18BB9C00224D46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1A1D18BB9C00224D46 /* main.m */; };
 		6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */; };
-		6EC73F211D18BB9C00224D46 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F201D18BB9C00224D46 /* ViewController.m */; };
 		6EC73F241D18BB9C00224D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F221D18BB9C00224D46 /* Main.storyboard */; };
 		6EC73F261D18BB9C00224D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F251D18BB9C00224D46 /* Assets.xcassets */; };
 		6EC73F291D18BB9C00224D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F271D18BB9C00224D46 /* LaunchScreen.storyboard */; };
 		6EC73F341D18BB9D00224D46 /* streakfeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F331D18BB9D00224D46 /* streakfeedTests.m */; };
 		6EC73F3F1D18BB9D00224D46 /* streakfeedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */; };
+		6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F4E1D18BE9F00224D46 /* RootViewController.m */; };
+		6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */; };
 		8221BE5928D6B55B8918B540 /* libPods-streakfeed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */; };
 		D55C18DBB2A457EF251FD52A /* libPods-streakfeedUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */; };
 /* End PBXBuildFile section */
@@ -45,8 +46,6 @@
 		6EC73F1A1D18BB9C00224D46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6EC73F1C1D18BB9C00224D46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6EC73F1F1D18BB9C00224D46 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6EC73F201D18BB9C00224D46 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6EC73F231D18BB9C00224D46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6EC73F251D18BB9C00224D46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EC73F281D18BB9C00224D46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +56,10 @@
 		6EC73F3A1D18BB9D00224D46 /* streakfeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = streakfeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = streakfeedUITests.m; sourceTree = "<group>"; };
 		6EC73F401D18BB9D00224D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EC73F4D1D18BE9F00224D46 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ViewControllers/RootViewController.h; sourceTree = "<group>"; };
+		6EC73F4E1D18BE9F00224D46 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = ViewControllers/RootViewController.m; sourceTree = "<group>"; };
+		6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakFeedViewController.h; path = ViewControllers/StreakFeedViewController.h; sourceTree = "<group>"; };
+		6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakFeedViewController.m; path = ViewControllers/StreakFeedViewController.m; sourceTree = "<group>"; };
 		7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeed.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB27FBC62969841A2921CA1 /* Pods-streakfeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeed/Pods-streakfeed.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0444381AF87E9CEC1B5139 /* Pods-streakfeedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedUITests/Pods-streakfeedUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,10 +121,8 @@
 		6EC73F181D18BB9C00224D46 /* streakfeed */ = {
 			isa = PBXGroup;
 			children = (
-				6EC73F1C1D18BB9C00224D46 /* AppDelegate.h */,
-				6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */,
-				6EC73F1F1D18BB9C00224D46 /* ViewController.h */,
-				6EC73F201D18BB9C00224D46 /* ViewController.m */,
+				6EC73F4C1D18BE7700224D46 /* AppDelegate */,
+				6EC73F531D18BED000224D46 /* ViewControllers */,
 				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
 				6EC73F251D18BB9C00224D46 /* Assets.xcassets */,
 				6EC73F271D18BB9C00224D46 /* LaunchScreen.storyboard */,
@@ -155,6 +156,26 @@
 				6EC73F401D18BB9D00224D46 /* Info.plist */,
 			);
 			path = streakfeedUITests;
+			sourceTree = "<group>";
+		};
+		6EC73F4C1D18BE7700224D46 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6EC73F1C1D18BB9C00224D46 /* AppDelegate.h */,
+				6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6EC73F531D18BED000224D46 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */,
+				6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */,
+				6EC73F4D1D18BE9F00224D46 /* RootViewController.h */,
+				6EC73F4E1D18BE9F00224D46 /* RootViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		915574B74E9E50D94037508A /* Frameworks */ = {
@@ -441,8 +462,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC73F211D18BB9C00224D46 /* ViewController.m in Sources */,
+				6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */,
 				6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */,
+				6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */,
 				6EC73F1B1D18BB9C00224D46 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
