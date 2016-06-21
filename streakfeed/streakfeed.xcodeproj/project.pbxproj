@@ -60,6 +60,9 @@
 		6EC73F4E1D18BE9F00224D46 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = ViewControllers/RootViewController.m; sourceTree = "<group>"; };
 		6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakFeedViewController.h; path = ViewControllers/StreakFeedViewController.h; sourceTree = "<group>"; };
 		6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakFeedViewController.m; path = ViewControllers/StreakFeedViewController.m; sourceTree = "<group>"; };
+		6EC73F551D18BF5F00224D46 /* kConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kConstants.h; path = constants/kConstants.h; sourceTree = "<group>"; };
+		6EC73F561D18BF5F00224D46 /* kErrorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kErrorConstants.h; path = constants/kErrorConstants.h; sourceTree = "<group>"; };
+		6EC73F571D18BF5F00224D46 /* kRESTConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kRESTConstants.h; path = constants/kRESTConstants.h; sourceTree = "<group>"; };
 		7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeed.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB27FBC62969841A2921CA1 /* Pods-streakfeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeed/Pods-streakfeed.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0444381AF87E9CEC1B5139 /* Pods-streakfeedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedUITests/Pods-streakfeedUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		6EC73F181D18BB9C00224D46 /* streakfeed */ = {
 			isa = PBXGroup;
 			children = (
+				6EC73F541D18BF5100224D46 /* Constants */,
 				6EC73F4C1D18BE7700224D46 /* AppDelegate */,
 				6EC73F531D18BED000224D46 /* ViewControllers */,
 				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
@@ -176,6 +180,16 @@
 				6EC73F4E1D18BE9F00224D46 /* RootViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6EC73F541D18BF5100224D46 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6EC73F551D18BF5F00224D46 /* kConstants.h */,
+				6EC73F561D18BF5F00224D46 /* kErrorConstants.h */,
+				6EC73F571D18BF5F00224D46 /* kRESTConstants.h */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		915574B74E9E50D94037508A /* Frameworks */ = {
