@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StreakFeedViewController : UIViewController
+@interface StreakFeedViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
+
 
 @end
