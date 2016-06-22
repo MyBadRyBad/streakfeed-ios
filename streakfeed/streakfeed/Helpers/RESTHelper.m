@@ -1,9 +1,9 @@
 //
 //  RESTHelper.m
-//  onepagestreak
+//  streakfeed
 //
-//  Created by Ryan Badilla on 6/18/16.
-//  Copyright © 2016 rybad. All rights reserved.
+//  Created by Ryan Badilla on 6/20/16.
+//  Copyright © 2016 rybadilla. All rights reserved.
 //
 
 #import "RESTHelper.h"
@@ -25,15 +25,51 @@
 
 @implementation RESTHelper
 
+#pragma mark -
+#pragma mark - get json data - Models
++ (void)getStreakTypeModelsForDate:(NSDate *)date
+                      onCompletion:(CompletionWithArrayBlock)onCompletion {
+    [self getStreakTypeDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
+        onCompletion((!error && array) ? [ModelHelper streakTypesFromDictionaryArray:array] : array, error);
+    }];
+}
++ (void)getPhotosModelsForDate:(NSDate *)date
+                  onCompletion:(CompletionWithArrayBlock)onCompletion {
+    [self getPhotosDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
+        onCompletion((!error && array) ? [ModelHelper photosFromDictionaryArray:array] : array, error);
+    }];
+}
++ (void)getLocationsModelsForDate:(NSDate *)date
+                     onCompletion:(CompletionWithArrayBlock)onCompletion {
+    [self getLocationsDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
+        onCompletion((!error && array) ? [ModelHelper locationsFromDictionaryArray:array] : array, error);
+    }];
+}
+
++ (void)getFullStreakDataModelsForDates:(NSArray *)datesArray
+                           onCompletion:(CompletionWithArrayBlock)onCompletion {
+}
 
 #pragma mark - 
-#pragma mark - get json data
-+ (void)getPhotosForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion {
+#pragma mark - get json data - dictionary
++ (void)getStreakTypeDictionariesForDate:(NSDate *)date
+                            onCompletion:(CompletionWithArrayBlock)onCompletion {
+    NSString *utcString = [NSString stringWithFormat: @"%ld", [date utcTimeStamp]];
+    NSString *baseStreakURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, ENDPOINT_STREAK];
+    NSString *fullURL = [NSString stringWithFormat:@"%@%@", baseStreakURL, utcString];
+    
+    [self requestDataFromURL:fullURL
+                  httpMethod:@"GET"
+                onCompletion:^(NSArray *array, NSError *error) {
+                    onCompletion(array, error);
+                }];
+}
+
++ (void)getPhotosDictionariesForDate:(NSDate *)date
+                        onCompletion:(CompletionWithArrayBlock)onCompletion {
     NSString *utcString = [NSString stringWithFormat: @"%ld", [date utcTimeStamp]];
     NSString *baseStreakURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, ENDPOINT_PHOTOS];
     NSString *fullURL = [NSString stringWithFormat:@"%@%@", baseStreakURL, utcString];
-    
-    NSLog(@"utcTime: %@", utcString);
     
     [self requestDataFromURL:fullURL
                   httpMethod:@"GET"
@@ -42,27 +78,12 @@
     }];
 }
 
-+ (void)getStreaksForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion {
-    NSString *utcString = [NSString stringWithFormat: @"%ld", [date utcTimeStamp]];
-    NSString *baseStreakURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, ENDPOINT_STREAK];
-    NSString *fullURL = [NSString stringWithFormat:@"%@%@", baseStreakURL, utcString];
-    
-    NSLog(@"utcTime: %@", utcString);
-    
-    [self requestDataFromURL:fullURL
-                  httpMethod:@"GET"
-                onCompletion:^(NSArray *array, NSError *error) {
-                    onCompletion(array, error);
-                }];
-}
-
-+ (void)getLocationsForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion {
++ (void)getLocationsDictionariesForDate:(NSDate *)date
+                           onCompletion:(CompletionWithArrayBlock)onCompletion {
     NSString *utcString = [NSString stringWithFormat: @"%ld", [date utcTimeStamp]];
     NSString *baseStreakURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, ENDPOINT_LOCATION];
     NSString *fullURL = [NSString stringWithFormat:@"%@%@", baseStreakURL, utcString];
     
-    NSLog(@"utcTime: %@", utcString);
-    
     [self requestDataFromURL:fullURL
                   httpMethod:@"GET"
                 onCompletion:^(NSArray *array, NSError *error) {
@@ -70,10 +91,8 @@
                 }];
 }
 
-#pragma mark -
-#pragma mark - get all data
-+ (void)getDataForDates:(NSArray *)datesArray onCompletion:(CompletionWithArrayBlock)onCompletion {
-    
++ (void)getFullStreakDataDictionariesForDates:(NSArray *)datesArray
+                                 onCompletion:(CompletionWithArrayBlock)onCompletion {
     if (datesArray && [datesArray count] > 0) {
         NSMutableArray *dataArray = [NSMutableArray new];
         NSError __block *dataError;
@@ -82,7 +101,7 @@
         
         for (NSDate *date in datesArray) {
             dispatch_group_enter(group);
-            [self getDataForDate:date onCompletion:^(NSDictionary *dictionary, NSError *error) {
+            [self getStreakDataForDate:date onCompletion:^(NSDictionary *dictionary, NSError *error) {
                 if (!error) {
                     if (dictionary) [dataArray addObject:dictionary];
                 } else {
@@ -99,16 +118,15 @@
     }
 }
 
-+ (void)getDataForDate:(NSDate *)date onCompletion:(CompletionWithDictionaryBlock)onCompletion
-{
-    
++ (void)getStreakDataForDate:(NSDate *)date
+                onCompletion:(CompletionWithDictionaryBlock)onCompletion {
     NSMutableDictionary *dataDictionary = [NSMutableDictionary new];
     NSError __block *dataError;
     
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_enter(group);
-    [self getStreaksForDate:date onCompletion:^(NSArray *array, NSError *error) {
+    [self getStreakTypeDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
             if (array) [dataDictionary setObject:array forKey:kRESTStreakKey];
         } else {
@@ -119,7 +137,7 @@
     }];
     
     dispatch_group_enter(group);
-    [self getPhotosForDate:date onCompletion:^(NSArray *array, NSError *error) {
+    [self getPhotosDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
             if (array) [dataDictionary setObject:array forKey:kRESTStreakKey];
         } else {
@@ -130,7 +148,7 @@
     }];
     
     
-    [self getLocationsForDate:date onCompletion:^(NSArray *array, NSError *error) {
+    [self getLocationsDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
             [dataDictionary setObject:array forKey:kRESTStreakKey];
         } else {
@@ -148,10 +166,11 @@
 }
 
 
-
 #pragma mark -
 #pragma mark - generic request
-+ (void)requestDataFromURL:(NSString *)url httpMethod:(NSString *)httpMethod onCompletion:(CompletionWithArrayBlock)onCompletion {
++ (void)requestDataFromURL:(NSString *)url
+                httpMethod:(NSString *)httpMethod
+              onCompletion:(CompletionWithArrayBlock)onCompletion {
 
     // Create manager
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

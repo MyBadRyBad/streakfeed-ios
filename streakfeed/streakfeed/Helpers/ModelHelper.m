@@ -1,9 +1,9 @@
 //
 //  ModelHelper.m
-//  onepagestreak
+//  streakfeed
 //
 //  Created by Ryan Badilla on 6/20/16.
-//  Copyright © 2016 rybad. All rights reserved.
+//  Copyright © 2016 rybadilla. All rights reserved.
 //
 
 #import "ModelHelper.h"
@@ -92,13 +92,26 @@
     return nil;
 }
 
++ (NSMutableArray *)streakCardsFromStreakTypeDictionaryArray:(NSArray *)streakTypeArray
+                                    locationsDictionaryArray:(NSArray *)locationsArray
+                                       photosDictionaryArray:(NSArray *)photosArray {
+
+    if (streakTypeArray) {
+        
+        
+        for (StreakTypeModel *streakTypeModel in streakTypeArray) {
+            
+        }
+    }
+    
+    return nil;
+}
+
 
 #pragma mark -
 #pragma mark - helper methods
 + (NSDate *)dateFromUTC:(NSNumber *)utc {
-
-    
-    return nil;
+    return (utc) ? [NSDate dateWithTimeIntervalSince1970:lround(floor([utc doubleValue]))] : nil;
 }
 
 + (BOOL)isValidArrayOfDictionary:(NSArray *)array {

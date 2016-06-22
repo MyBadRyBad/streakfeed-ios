@@ -65,7 +65,7 @@
 #pragma mark -
 #pragma mark - loadData
 - (void)fetchDataWithDates:(NSArray *)datesArray {
-    [RESTHelper getDataForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
+  /*  [RESTHelper getStreakDataForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
             if (!_dateArray) _dateArray = [NSMutableArray new];
             [_dateArray addObjectsFromArray:datesArray];
@@ -75,7 +75,7 @@
                                            message:error.localizedDescription
                                        actionTitle:kAlertCancelActionTitle];
         }
-    }];
+    }]; */
 }
 
 
@@ -112,6 +112,9 @@
     
     return [_dateArray count];
 }
+
+#pragma mark -
+#pragma mark - ne
 
 #pragma mark -
 #pragma mark - alertError

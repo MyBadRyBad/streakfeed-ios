@@ -1,8 +1,8 @@
 //
 //  RESTHelper.h
-//  onepagestreak
+//  streakfeed
 //
-//  Created by Ryan Badilla on 6/18/16.
+//  Created by Ryan Badilla on 6/20/16.
 //  Copyright © 2016 rybad. All rights reserved.
 //
 
@@ -16,12 +16,19 @@ typedef void (^CompletionWithArrayBlock)(NSArray *array, NSError *error);
 
 @interface RESTHelper : NSObject
 
-
+//////////////////////////////////////////
 // JSON Get request
-+ (void)getPhotosForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion;
-+ (void)getStreaksForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion;
-+ (void)getLocationsForDate:(NSDate *)date onCompletion:(CompletionWithArrayBlock)onCompletion;
+//////////////////////////////////////////
++ (void)getStreakTypeModelsForDate:(NSDate *)date
+                      onCompletion:(CompletionWithArrayBlock)onCompletion;
 
-+ (void)getDataForDates:(NSArray *)datesArray onCompletion:(CompletionWithArrayBlock)onCompletion;
-+ (void)getDataForDate:(NSDate *)date onCompletion:(CompletionWithDictionaryBlock)onCompletion;
++ (void)getPhotosModelsForDate:(NSDate *)date
+                  onCompletion:(CompletionWithArrayBlock)onCompletion;
+
++ (void)getLocationsModelsForDate:(NSDate *)date
+                     onCompletion:(CompletionWithArrayBlock)onCompletion;
+
++ (void)getFullStreakDataModelsForDates:(NSArray *)datesArray
+                           onCompletion:(CompletionWithArrayBlock)onCompletion;
+
 @end

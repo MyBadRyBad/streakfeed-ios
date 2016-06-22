@@ -1,9 +1,9 @@
 //
 //  StreakCardModel.m
-//  onepagestreak
+//  streakfeed
 //
 //  Created by Ryan Badilla on 6/20/16.
-//  Copyright © 2016 rybad. All rights reserved.
+//  Copyright © 2016 rybadilla. All rights reserved.
 //
 
 #import "StreakCardModel.h"

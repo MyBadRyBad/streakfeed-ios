@@ -1,9 +1,9 @@
 //
 //  StreakCardTableViewCell.m
-//  onepagestreak
+//  streakfeed
 //
-//  Created by Ryan Badilla on 6/19/16.
-//  Copyright © 2016 rybad. All rights reserved.
+//  Created by Ryan Badilla on 6/20/16.
+//  Copyright © 2016 rybadilla. All rights reserved.
 //
 
 #import "StreakCardTableViewCell.h"
