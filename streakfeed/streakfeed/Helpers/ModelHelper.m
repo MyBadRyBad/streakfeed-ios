@@ -103,6 +103,7 @@
     return nil;
 }
 
+
 #pragma mark -
 #pragma mark - create model methods
 + (StreakCardModel *)streakCardWithStreakTypeDictionary:(NSDictionary *)streakTypeDictionary {

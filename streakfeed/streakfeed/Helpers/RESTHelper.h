@@ -31,4 +31,7 @@ typedef void (^CompletionWithArrayBlock)(NSArray *array, NSError *error);
 + (void)getStreakCardDataModelsForDates:(NSArray *)datesArray
                            onCompletion:(CompletionWithArrayBlock)onCompletion;
 
++ (void)getDictionaryOfStreakCardsAndDateKeysForDates:(NSArray *)datesArray
+                                         onCompletion:(CompletionWithDictionaryBlock)onCompletion;
+
 @end

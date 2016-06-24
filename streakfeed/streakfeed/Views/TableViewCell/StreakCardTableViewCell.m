@@ -68,14 +68,13 @@ static CGFloat const kLabelHeight = 16.0f;
     [self.contentView addSubview:[self durationTypeLabel]];
     [self.contentView addSubview:[self startTimeLabel]];
     
-    [self.contentView addSubview:[self mapView]];
     [self.contentView addSubview:[self photoImageView]];
 }
 
 
 
 - (void)setupConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_streakTypeLabel, _durationTypeLabel, _startTimeLabel, _mapView, _photoImageView);
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_streakTypeLabel, _durationTypeLabel, _startTimeLabel, _photoImageView);
     NSDictionary *metrics = @{@"vLabel" : @(kLabelHeight)};
     
     // add vertical constraints
@@ -87,22 +86,12 @@ static CGFloat const kLabelHeight = 16.0f;
                                                                 multiplier:1.0f
                                                                   constant:0.0f]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_streakTypeLabel(vLabel)][_durationTypeLabel(vLabel)][_startTimeLabel(vLabel)]" options:0 metrics:metrics views:viewDictionary]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mapView]|" options:0 metrics:metrics views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_streakTypeLabel(vLabel)][_durationTypeLabel(vLabel)][_startTimeLabel(vLabel)]" options:0 metrics:metrics views:viewDictionary]];
                                       
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
     
     // add horizontal constraints
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_mapView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.contentView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                multiplier:0.50f
-                                                                  constant:0.0f]];
-    
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_photoImageView
                                                                  attribute:NSLayoutAttributeWidth
                                                                  relatedBy:NSLayoutRelationEqual
@@ -111,17 +100,11 @@ static CGFloat const kLabelHeight = 16.0f;
                                                                 multiplier:0.50f
                                                                   constant:0.0f]];
     
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_mapView]|" options:0 metrics:metrics views:viewDictionary]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
-    
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_streakTypeLabel][_photoImageView]" options:0 metrics:metrics views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_streakTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
 
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_durationTypeLabel][_photoImageView]" options:0 metrics:metrics views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_durationTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_startTimeLabel][_photoImageView]" options:0 metrics:metrics views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_startTimeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
     
 }
@@ -177,14 +160,5 @@ static CGFloat const kLabelHeight = 16.0f;
     }
     
     return _photoImageView;
-}
-
-- (MKMapView *)mapView {
-    if (!_mapView) {
-        _mapView = [MKMapView new];
-        _mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    
-    return _mapView;
 }
 @end

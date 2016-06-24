@@ -10,7 +10,11 @@
 #import "StreakCardTableViewCell.h"
 #import "RESTHelper.h"
 #import "kErrorConstants.h"
+#import "StreakCardModel.h"
 #import <NSDate+Helper.h>
+
+static NSInteger const kDaysFetchCount = 1;
+static CGFloat const kTableCellHeight = 80.0f;
 
 @interface StreakFeedViewController ()
 
@@ -25,10 +29,10 @@
 #pragma mark - view controller life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self setup];
     
     
-    NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:7];
+    NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:kDaysFetchCount];
     [self fetchDataWithDates:dates];
 }
 
@@ -68,10 +72,15 @@
 #pragma mark -
 #pragma mark - loadData
 - (void)fetchDataWithDates:(NSArray *)datesArray {
-    [RESTHelper getStreakCardDataModelsForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
+    [RESTHelper getDictionaryOfStreakCardsAndDateKeysForDates:datesArray onCompletion:^(NSDictionary *dictionary, NSError *error) {
         if (!error) {
             if (!_dateArray) _dateArray = [NSMutableArray new];
-            [_dateArray addObjectsFromArray:datesArray];
+            if (!_dataDictionary) _dataDictionary = [NSMutableDictionary new];
+            
+            [_dateArray addObjectsFromArray:[self dateArrayToKeys:datesArray]];
+            [_dataDictionary addEntriesFromDictionary:dictionary];
+            
+            [_tableView reloadData];
             
         } else {
             [self showAlertViewControllerWithTitle:kAlertTitle
@@ -103,7 +112,25 @@
         cell = [[StreakCardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
+    [self setupStreakCardTableViewCell:cell atIndexPath:indexPath];
+    
     return cell;
+}
+
+- (void)setupStreakCardTableViewCell:(StreakCardTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSArray *cardArray = _dataDictionary[_dateArray[indexPath.section]];
+    StreakCardModel *streakCard = cardArray[indexPath.row];
+    
+    if (streakCard) {
+        NSString *streakTypeString = streakCard.streakType.type;
+        NSString *startTimeString = [streakCard.streakType.start_at stringWithDateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+    
+        NSString *durationString = [NSString stringWithFormat:@"%ld min", lround([streakCard.streakType.stop_at timeIntervalSinceDate:streakCard.streakType.start_at] / 60)];
+    
+        cell.streakTypeLabel.text = streakTypeString;
+        cell.startTimeLabel.text = startTimeString;
+        cell.durationTypeLabel.text = durationString;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -111,13 +138,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSString *dateKey = _dateArray[section];
+    NSArray *cardArray = _dataDictionary[_dateArray[section]];
     
-    return [_dateArray count];
+    return (cardArray) ? [cardArray count] : 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kTableCellHeight;
 }
 
 #pragma mark -
-#pragma mark - next seven dates
+#pragma mark - date helpers
 - (NSMutableArray *)daysDaysFromStartDate:(NSDate *)date daysCount:(NSInteger)days{
     if (days > 0) {
         NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
@@ -134,6 +165,19 @@
         return array;
         
     }
+    return nil;
+}
+
+- (NSMutableArray *)dateArrayToKeys:(NSArray *)dateArray {
+    if (dateArray) {
+        NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:[dateArray count]];
+        for (NSDate *date in dateArray) {
+            [newArray addObject:[date string]];
+        }
+        
+        return newArray;
+    }
+    
     return nil;
 }
 
@@ -168,6 +212,9 @@
     if (!_tableView) {
         _tableView = [UITableView new];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
     
     return _tableView;

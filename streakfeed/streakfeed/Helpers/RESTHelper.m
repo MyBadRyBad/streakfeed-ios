@@ -71,6 +71,38 @@
     }];
 }
 
++ (void)getDictionaryOfStreakCardsAndDateKeysForDates:(NSArray *)datesArray
+                                         onCompletion:(CompletionWithDictionaryBlock)onCompletion {
+    NSMutableDictionary __block *dataDictionary = [NSMutableDictionary new];
+    NSError __block *dataError = nil;
+    
+    dispatch_group_t streakGroup = dispatch_group_create();
+    
+    for (NSDate *date in datesArray) {
+        dispatch_group_enter(streakGroup);
+        [self getStreakCardDictionaryDataForDate:date
+                                    onCompletion:^(NSDictionary *dictionary, NSError *error) {
+                                        if (!error) {
+                                            if (dictionary) {
+                                                NSMutableArray * currentCardArray =
+                                                [ModelHelper streakCardsFromStreakTypeDictionaryArray:dictionary[kRESTStreakKey]
+                                                                             locationsDictionaryArray:dictionary[kRESTLocationKey]
+                                                                                photosDictionaryArray:dictionary[kRESTPhotoKey]];
+                                                [dataDictionary setObject:currentCardArray forKey:[date string]];
+                                            }
+                                        } else {
+                                            if (!dataError) dataError = error;
+                                        }
+                                        
+                                        dispatch_group_leave(streakGroup);
+                                    }];
+    }
+    
+    dispatch_group_notify(streakGroup, dispatch_get_main_queue(), ^{
+        onCompletion(dataDictionary, dataError);
+    });
+}
+
 #pragma mark - 
 #pragma mark - get json data - dictionary
 + (void)getStreakTypeDictionariesForDate:(NSDate *)date
@@ -137,7 +169,6 @@
         onCompletion(dataArray, dataError);
     });
 }
-
 
 + (void)getStreakCardDictionaryDataForDate:(NSDate *)date
                     onCompletion:(CompletionWithDictionaryBlock)onCompletion {

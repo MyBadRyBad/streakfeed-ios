@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UILabel *durationTypeLabel;
 @property (nonatomic, strong) UILabel *startTimeLabel;
 
+// http://stackoverflow.com/questions/6011104/mini-map-in-uitableview
 @property (nonatomic, strong) UIImageView *photoImageView;
-@property (nonatomic, strong) MKMapView *mapView;
 
 @end
