@@ -28,7 +28,7 @@ typedef void (^CompletionWithArrayBlock)(NSArray *array, NSError *error);
 + (void)getLocationsModelsForDate:(NSDate *)date
                      onCompletion:(CompletionWithArrayBlock)onCompletion;
 
-+ (void)getFullStreakDataModelsForDates:(NSArray *)datesArray
++ (void)getStreakCardDataModelsForDates:(NSArray *)datesArray
                            onCompletion:(CompletionWithArrayBlock)onCompletion;
 
 @end

@@ -46,8 +46,29 @@
     }];
 }
 
-+ (void)getFullStreakDataModelsForDates:(NSArray *)datesArray
++ (void)getStreakCardDataModelsForDates:(NSArray *)datesArray
                            onCompletion:(CompletionWithArrayBlock)onCompletion {
+    [self getStreakCardDictionariesForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
+        if (!error) {
+            NSMutableArray *cardArray = [NSMutableArray new];
+            
+            // get an array of valid streak card data
+            for (NSDictionary *dictionary in array) {
+                NSMutableArray * currentCardArray =
+                [ModelHelper streakCardsFromStreakTypeDictionaryArray:dictionary[kRESTStreakKey]
+                                             locationsDictionaryArray:dictionary[kRESTLocationKey]
+                                                photosDictionaryArray:dictionary[kRESTPhotoKey]];
+                
+                if (currentCardArray) {
+                    [cardArray addObjectsFromArray:currentCardArray];
+                }
+            }
+            
+            onCompletion(cardArray, error);
+        } else {
+            onCompletion(nil, error);
+        }
+    }];
 }
 
 #pragma mark - 
@@ -91,35 +112,35 @@
                 }];
 }
 
-+ (void)getFullStreakDataDictionariesForDates:(NSArray *)datesArray
-                                 onCompletion:(CompletionWithArrayBlock)onCompletion {
-    if (datesArray && [datesArray count] > 0) {
-        NSMutableArray *dataArray = [NSMutableArray new];
-        NSError __block *dataError;
-        
-        dispatch_group_t group = dispatch_group_create();
-        
-        for (NSDate *date in datesArray) {
-            dispatch_group_enter(group);
-            [self getStreakDataForDate:date onCompletion:^(NSDictionary *dictionary, NSError *error) {
-                if (!error) {
-                    if (dictionary) [dataArray addObject:dictionary];
-                } else {
-                    if (!dataError) dataError = error;
-                }
-                
-                dispatch_group_leave(group);
-            }];
-        }
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            onCompletion(dataArray, dataError);
-        });
++ (void)getStreakCardDictionariesForDates:(NSArray *)datesArray
+                           onCompletion:(CompletionWithArrayBlock)onCompletion {
+    NSMutableArray __block *dataArray = [NSMutableArray new];
+    NSError __block *dataError = nil;
+    
+    dispatch_group_t streakGroup = dispatch_group_create();
+    
+    for (NSDate *date in datesArray) {
+        dispatch_group_enter(streakGroup);
+        [self getStreakCardDictionaryDataForDate:date
+                                    onCompletion:^(NSDictionary *dictionary, NSError *error) {
+                                        if (!error) {
+                                            if (dictionary) [dataArray addObject:dictionary];
+                                        } else {
+                                            if (!dataError) dataError = error;
+                                        }
+                                        
+                                        dispatch_group_leave(streakGroup);
+                                    }];
     }
+    
+    dispatch_group_notify(streakGroup, dispatch_get_main_queue(), ^{
+        onCompletion(dataArray, dataError);
+    });
 }
 
-+ (void)getStreakDataForDate:(NSDate *)date
-                onCompletion:(CompletionWithDictionaryBlock)onCompletion {
+
++ (void)getStreakCardDictionaryDataForDate:(NSDate *)date
+                    onCompletion:(CompletionWithDictionaryBlock)onCompletion {
     NSMutableDictionary *dataDictionary = [NSMutableDictionary new];
     NSError __block *dataError;
     
@@ -139,7 +160,7 @@
     dispatch_group_enter(group);
     [self getPhotosDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
-            if (array) [dataDictionary setObject:array forKey:kRESTStreakKey];
+            if (array) [dataDictionary setObject:array forKey:kRESTPhotoKey];
         } else {
             if (!dataError) dataError = error;
         }
@@ -147,10 +168,10 @@
         dispatch_group_leave(group);
     }];
     
-    
+    dispatch_group_enter(group);
     [self getLocationsDictionariesForDate:date onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
-            [dataDictionary setObject:array forKey:kRESTStreakKey];
+            [dataDictionary setObject:array forKey:kRESTLocationKey];
         } else {
             if (!dataError) dataError = error;
         }

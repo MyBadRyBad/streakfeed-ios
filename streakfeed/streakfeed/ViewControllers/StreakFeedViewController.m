@@ -27,6 +27,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:7];
+    [self fetchDataWithDates:dates];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -65,7 +68,7 @@
 #pragma mark -
 #pragma mark - loadData
 - (void)fetchDataWithDates:(NSArray *)datesArray {
-  /*  [RESTHelper getStreakDataForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
+    [RESTHelper getStreakCardDataModelsForDates:datesArray onCompletion:^(NSArray *array, NSError *error) {
         if (!error) {
             if (!_dateArray) _dateArray = [NSMutableArray new];
             [_dateArray addObjectsFromArray:datesArray];
@@ -75,7 +78,7 @@
                                            message:error.localizedDescription
                                        actionTitle:kAlertCancelActionTitle];
         }
-    }]; */
+    }];
 }
 
 
@@ -114,7 +117,25 @@
 }
 
 #pragma mark -
-#pragma mark - ne
+#pragma mark - next seven dates
+- (NSMutableArray *)daysDaysFromStartDate:(NSDate *)date daysCount:(NSInteger)days{
+    if (days > 0) {
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate *startDate = [date beginningOfDay];
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:days];
+
+        for (NSInteger index = 0; index < days; index++) {
+            [dateComponents setDay:-index];
+            NSDate *newDate = [calendar dateByAddingComponents:dateComponents toDate:startDate options:0];
+            [array addObject:newDate];
+        }
+        
+        return array;
+        
+    }
+    return nil;
+}
 
 #pragma mark -
 #pragma mark - alertError
