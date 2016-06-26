@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2673C162B6545EBDE84C685F /* libPods-streakfeedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C1E8E376A18E6B1E47E103 /* libPods-streakfeedTests.a */; };
+		6E6F72521D208305005E8A03 /* Source Sans Pro regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */; };
 		6EC73F1B1D18BB9C00224D46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1A1D18BB9C00224D46 /* main.m */; };
 		6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */; };
 		6EC73F241D18BB9C00224D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F221D18BB9C00224D46 /* Main.storyboard */; };
@@ -26,6 +27,12 @@
 		6EDE51961D1FA84900C95E37 /* StreakCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE51951D1FA84900C95E37 /* StreakCardView.m */; };
 		6EDE519B1D1FAEC400C95E37 /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE519A1D1FAEC400C95E37 /* UIImageViewAligned.m */; };
 		6EDE51A11D1FB14000C95E37 /* UIColor+StreakFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE51A01D1FB14000C95E37 /* UIColor+StreakFeed.m */; };
+		6EDE51AF1D1FBE4600C95E37 /* Source Sans Pro 200.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */; };
+		6EDE51B01D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */; };
+		6EDE51B11D1FBE4600C95E37 /* Source Sans Pro 300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */; };
+		6EDE51B21D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */; };
+		6EDE51B31D1FBE4600C95E37 /* Source Sans Pro 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */; };
+		6EDE51B41D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */; };
 		8221BE5928D6B55B8918B540 /* libPods-streakfeed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */; };
 		D55C18DBB2A457EF251FD52A /* libPods-streakfeedUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */; };
 /* End PBXBuildFile section */
@@ -51,6 +58,7 @@
 		334A1C6C3206CF7137D621CE /* Pods-streakfeedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedTests/Pods-streakfeedTests.release.xcconfig"; sourceTree = "<group>"; };
 		43C1E8E376A18E6B1E47E103 /* libPods-streakfeedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeedUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro regular.ttf"; path = "fonts/Source Sans Pro regular.ttf"; sourceTree = "<group>"; };
 		6EC73F161D18BB9C00224D46 /* streakfeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = streakfeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC73F1A1D18BB9C00224D46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6EC73F1C1D18BB9C00224D46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +98,12 @@
 		6EDE519A1D1FAEC400C95E37 /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewAligned.m; path = OpenSource/UIImageViewAligned.m; sourceTree = "<group>"; };
 		6EDE519F1D1FB14000C95E37 /* UIColor+StreakFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+StreakFeed.h"; path = "Helpers/UIColor+StreakFeed.h"; sourceTree = "<group>"; };
 		6EDE51A01D1FB14000C95E37 /* UIColor+StreakFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+StreakFeed.m"; path = "Helpers/UIColor+StreakFeed.m"; sourceTree = "<group>"; };
+		6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200.ttf"; path = "fonts/Source Sans Pro 200.ttf"; sourceTree = "<group>"; };
+		6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200italic.ttf"; path = "fonts/Source Sans Pro 200italic.ttf"; sourceTree = "<group>"; };
+		6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300.ttf"; path = "fonts/Source Sans Pro 300.ttf"; sourceTree = "<group>"; };
+		6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300italic.ttf"; path = "fonts/Source Sans Pro 300italic.ttf"; sourceTree = "<group>"; };
+		6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600.ttf"; path = "fonts/Source Sans Pro 600.ttf"; sourceTree = "<group>"; };
+		6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600italic.ttf"; path = "fonts/Source Sans Pro 600italic.ttf"; sourceTree = "<group>"; };
 		7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeed.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB27FBC62969841A2921CA1 /* Pods-streakfeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeed/Pods-streakfeed.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0444381AF87E9CEC1B5139 /* Pods-streakfeedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedUITests/Pods-streakfeedUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -170,6 +184,7 @@
 		6EC73F191D18BB9C00224D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6EDE51A21D1FBE3B00C95E37 /* fonts */,
 				6EC73F1A1D18BB9C00224D46 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -291,6 +306,20 @@
 				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		6EDE51A21D1FBE3B00C95E37 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */,
+				6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */,
+				6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */,
+				6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */,
+				6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */,
+				6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */,
+				6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 		915574B74E9E50D94037508A /* Frameworks */ = {
@@ -435,9 +464,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDE51B31D1FBE4600C95E37 /* Source Sans Pro 600.ttf in Resources */,
+				6EDE51B01D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf in Resources */,
+				6E6F72521D208305005E8A03 /* Source Sans Pro regular.ttf in Resources */,
+				6EDE51AF1D1FBE4600C95E37 /* Source Sans Pro 200.ttf in Resources */,
 				6EC73F291D18BB9C00224D46 /* LaunchScreen.storyboard in Resources */,
+				6EDE51B21D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf in Resources */,
 				6EC73F261D18BB9C00224D46 /* Assets.xcassets in Resources */,
+				6EDE51B41D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf in Resources */,
 				6EC73F241D18BB9C00224D46 /* Main.storyboard in Resources */,
+				6EDE51B11D1FBE4600C95E37 /* Source Sans Pro 300.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

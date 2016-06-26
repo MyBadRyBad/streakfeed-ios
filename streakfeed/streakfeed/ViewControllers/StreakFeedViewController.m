@@ -9,8 +9,10 @@
 #import "StreakFeedViewController.h"
 #import "StreakCardTableViewCell.h"
 #import "RESTHelper.h"
+#import "kConstants.h"
 #import "kErrorConstants.h"
 #import "StreakCardModel.h"
+#import "UIColor+StreakFeed.h"
 #import <MapKit/MapKit.h>
 #import <NSDate+Helper.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -19,7 +21,7 @@
 
 static NSInteger const kDaysFetchCount  = 1;
 static CGFloat const kTableCellHeight   = 100.0f;
-static CGFloat const kTableHeaderHeight = 50.0f;
+static CGFloat const kTableHeaderHeight = 40.0f;
 
 static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
 static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
@@ -48,6 +50,15 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setup];
+    
+    NSArray *fontFamilies = [UIFont familyNames];
+    
+    for (int i = 0; i < [fontFamilies count]; i++)
+    {
+        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+        NSLog (@"%@: %@", fontFamily, fontNames);
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -60,6 +71,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 - (void)setup {
     [self setupView];
     [self setupConstraints];
+    [self setupNavigationBar];
     [self fetchInitialData];
 }
 
@@ -72,7 +84,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     NSDictionary *metrics = @{@"vBuffer" : @(20)};
     
     // setup vertical constraints
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vBuffer-[_tableView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|"
                                                                       options:0
                                                                       metrics:metrics
                                                                         views:viewsDictionary]];
@@ -82,6 +94,25 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
                                                                       options:0
                                                                       metrics:metrics
                                                                         views:viewsDictionary]];
+}
+
+- (void)setupNavigationBar {
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor navigationBarColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    self.navigationItem.title = NSLocalizedString(@"Streak Feed", nil);
+    NSShadow *shadow = [[NSShadow alloc] init];
+    NSDictionary *titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+        [UIColor colorWithWhite:1.0f alpha:1.0f], NSForegroundColorAttributeName,
+        shadow, NSShadowAttributeName,
+        shadow, NSShadowAttributeName,
+        [UIFont fontWithName:GLOBAL_FONT_NAME_LIGHT size:GLOBAL_FONT_SIZE_NAV_BAR], NSFontAttributeName,
+        nil];
+    
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
 }
 
 
@@ -242,17 +273,18 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width - (10 * 2), kTableHeaderHeight)];
     label.textAlignment = NSTextAlignmentLeft;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor navigationBarColor];
     label.text = [_dateArray[section] stringWithFormat:@"MMMM d, yyyy"];
-    
-    UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(10, kTableHeaderHeight, tableView.frame.size.width, 1)];
-    separatorLine.backgroundColor = [UIColor blackColor];
+    label.font = [UIFont fontWithName:GLOBAL_FONT_NAME_REGULAR size:GLOBAL_FONT_SIZE_TABLEHEADER];
+
+    UIView *separatorLineBelow = [[UIView alloc] initWithFrame:CGRectMake(10, kTableHeaderHeight, tableView.frame.size.width, 1)];
+    separatorLineBelow.backgroundColor = [UIColor navigationBarColor];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, kTableHeaderHeight)];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor backgroundColor];
     
     [view addSubview:label];
-    [view addSubview:separatorLine];
+    [view addSubview:separatorLineBelow];
     
     
     return view;
@@ -280,6 +312,8 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         }
         
         [self setupStreakCardTableViewCell:cell atIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor backgroundColor];
         
         return cell;
     } else { // show no streaks
@@ -287,8 +321,10 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kTableViewCellEmptyID];
         }
-        
+    
         [self setupEmptyTableViewCell:cell atIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor backgroundColor];
         
         return cell;
     }
@@ -421,6 +457,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.separatorColor = [UIColor clearColor];
+        _tableView.backgroundColor = [UIColor clearColor];
         
         [_tableView registerClass:[StreakCardTableViewCell class] forCellReuseIdentifier:kTableViewCellStreakCardID];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kTableViewCellEmptyID];

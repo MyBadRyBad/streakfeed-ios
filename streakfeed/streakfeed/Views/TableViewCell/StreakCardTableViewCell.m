@@ -9,8 +9,8 @@
 #import "StreakCardTableViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat kVerticalMargin = 4.0f;
-static CGFloat kHorizontalMargin = 4.0f;
+static CGFloat kVerticalMargin = 6.0f;
+static CGFloat kHorizontalMargin = 8.0f;
 
 @interface StreakCardTableViewCell()
 

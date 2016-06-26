@@ -41,5 +41,15 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Source Sans Pro 200.ttf</string>
+		<string>Source Sans Pro 200italic.ttf</string>
+		<string>Source Sans Pro 300.ttf</string>
+		<string>Source Sans Pro 300italic.ttf</string>
+		<string>Source Sans Pro 600.ttf</string>
+		<string>Source Sans Pro 600italic.ttf</string>
+		<string>Source Sans Pro regular.ttf</string>
+	</array>
 </dict>
 </plist>

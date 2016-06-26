@@ -11,7 +11,18 @@
 @interface UIColor (StreakFeed)
 
 + (UIColor *)calmColor;
++ (UIColor *)calmFontColor;
+
 + (UIColor *)tenseColor;
++ (UIColor *)tenseFontColor;
+
 + (UIColor *)focusColor;
++ (UIColor *)focusFontColor;
+
++ (UIColor *)globalFontColor;
++ (UIColor *)globalHeaderColor;
+
++ (UIColor *)backgroundColor;
++ (UIColor *)navigationBarColor;
 
 @end

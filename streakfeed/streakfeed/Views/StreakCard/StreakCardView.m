@@ -72,7 +72,8 @@ static CGFloat const kLabelHeight = 16.0f;
 - (void)setupConstraints {
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_streakTypeLabel, _durationTypeLabel, _startTimeLabel, _photoImageView);
     NSDictionary *metrics = @{@"vLabel" : @(kLabelHeight),
-                              @"vBuffer" :@(4)};
+                              @"vBuffer" :@(4),
+                              @"hBuffer" :@(10)};
     
     // add vertical constraints
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_durationTypeLabel
@@ -97,11 +98,11 @@ static CGFloat const kLabelHeight = 16.0f;
                                                     multiplier:0.50f
                                                       constant:0.0f]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_streakTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hBuffer-[_streakTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_durationTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hBuffer-[_durationTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_startTimeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hBuffer-[_startTimeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
     
 }
@@ -132,6 +133,8 @@ static CGFloat const kLabelHeight = 16.0f;
     if (!_streakTypeLabel) {
         _streakTypeLabel = [UILabel new];
         _streakTypeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _streakTypeLabel.font = [UIFont fontWithName:GLOBAL_FONT_NAME_REGULAR size:GLOBAL_FONT_SIZE_CARD];
+        _streakTypeLabel.textColor = [UIColor globalFontColor];
     }
     
     return _streakTypeLabel;
@@ -141,6 +144,8 @@ static CGFloat const kLabelHeight = 16.0f;
     if (!_durationTypeLabel) {
         _durationTypeLabel = [UILabel new];
         _durationTypeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _durationTypeLabel.font = [UIFont fontWithName:GLOBAL_FONT_NAME size:GLOBAL_FONT_SIZE_CARD];
+        _durationTypeLabel.textColor = [UIColor globalFontColor];
     }
     
     return _durationTypeLabel;
@@ -150,6 +155,8 @@ static CGFloat const kLabelHeight = 16.0f;
     if (!_startTimeLabel) {
         _startTimeLabel = [UILabel new];
         _startTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _startTimeLabel.font = [UIFont fontWithName:GLOBAL_FONT_NAME size:GLOBAL_FONT_SIZE_CARD];
+        _startTimeLabel.textColor = [UIColor globalFontColor];
     }
     
     return _startTimeLabel;
