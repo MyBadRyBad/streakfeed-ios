@@ -33,6 +33,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 
 // constraints
 @property (nonatomic, strong) NSLayoutConstraint *vConstraintNoConnectionLabel;
+@property (nonatomic, strong) NSLayoutConstraint *hConstraintRetryConnectionButton;
 @property (nonatomic, strong) NSArray *vConstraintsLabelAndButton;
 @property (nonatomic, strong) NSArray *hConstraintsNoConnectionLabel;
 @property (nonatomic, strong) NSArray *hConstraintsRetryConnectionButton;
@@ -95,9 +96,10 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     
     
     // setup constraints if necessary
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_noConnectionLabel, _retryConnectionButton);
-    NSDictionary *metrics = @{@"vLabel": @(120),
-                              @"vButton" : @(44)};
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_noConnectionLabel, _retryConnectionButton, self.view);
+    NSDictionary *metrics = @{@"vLabel": @(20),
+                              @"vButton" : @(44),
+                              @"hButton" : @(80)};
     
     // setup vertical constraints
     if (!_vConstraintNoConnectionLabel) {
@@ -112,7 +114,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         [self.view addConstraint:_vConstraintNoConnectionLabel];
         
     }
-    
+
     if (!_vConstraintsLabelAndButton) {
         _vConstraintsLabelAndButton = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_noConnectionLabel(vLabel)][_retryConnectionButton(vButton)]" options:0 metrics:metrics views:viewsDictionary];
         
@@ -121,15 +123,26 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 
     
     // setup horizontal constraints
+    if (!_hConstraintRetryConnectionButton) {
+        _hConstraintRetryConnectionButton = [NSLayoutConstraint constraintWithItem:_retryConnectionButton
+                                                                         attribute:NSLayoutAttributeCenterX
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.view
+                                                                         attribute:NSLayoutAttributeCenterX
+                                                                        multiplier:1.0f
+                                                                          constant:0.0];
+        
+        [self.view addConstraint:_hConstraintRetryConnectionButton];
+    }
+    
     if (!_hConstraintsNoConnectionLabel) {
         _hConstraintsNoConnectionLabel = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_noConnectionLabel]-|" options:0 metrics:metrics views:viewsDictionary];
         
         [self.view addConstraints:_hConstraintsNoConnectionLabel];
     }
-
     
     if (!_hConstraintsRetryConnectionButton) {
-        _hConstraintsRetryConnectionButton = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_retryConnectionButton]-|" options:0 metrics:metrics views:viewsDictionary];
+        _hConstraintsRetryConnectionButton = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_retryConnectionButton(hButton)]" options:0 metrics:metrics views:viewsDictionary];
         
         [self.view addConstraints:_hConstraintsRetryConnectionButton];
     }
@@ -144,6 +157,11 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     if (_vConstraintsLabelAndButton) {
         [self.view removeConstraints:_vConstraintsLabelAndButton];
         _vConstraintsLabelAndButton = nil;
+    }
+    
+    if (_hConstraintRetryConnectionButton) {
+        [self.view removeConstraint:_hConstraintRetryConnectionButton];
+        _hConstraintRetryConnectionButton = nil;
     }
     
     if (_hConstraintsNoConnectionLabel) {
@@ -433,6 +451,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         _noConnectionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         _noConnectionLabel.text = NSLocalizedString(@"No connection.", nil);
+        _noConnectionLabel.textAlignment = NSTextAlignmentCenter;
         
     }
     
@@ -444,8 +463,11 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         _retryConnectionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _retryConnectionButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateNormal];
-        [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateReserved];
+        [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateHighlighted];
         [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateSelected];
+        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         
         [_retryConnectionButton addTarget:self
                                    action:@selector(fetchInitialData)
