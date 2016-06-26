@@ -19,7 +19,7 @@
 
 static NSInteger const kDaysFetchCount  = 1;
 static CGFloat const kTableCellHeight   = 100.0f;
-static CGFloat const kTableHeaderHeight = 60.0f;
+static CGFloat const kTableHeaderHeight = 50.0f;
 
 static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
 static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
@@ -245,9 +245,14 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     label.textColor = [UIColor blackColor];
     label.text = [_dateArray[section] stringWithFormat:@"MMMM d, yyyy"];
     
+    UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(10, kTableHeaderHeight, tableView.frame.size.width, 1)];
+    separatorLine.backgroundColor = [UIColor blackColor];
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, kTableHeaderHeight)];
     view.backgroundColor = [UIColor whiteColor];
+    
     [view addSubview:label];
+    [view addSubview:separatorLine];
     
     
     return view;
