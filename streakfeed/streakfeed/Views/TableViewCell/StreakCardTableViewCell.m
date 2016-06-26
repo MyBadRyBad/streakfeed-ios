@@ -157,6 +157,7 @@ static CGFloat const kLabelHeight = 16.0f;
     if (!_photoImageView) {
         _photoImageView = [UIImageView new];
         _photoImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        _photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     
     return _photoImageView;

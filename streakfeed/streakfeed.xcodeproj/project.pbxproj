@@ -15,7 +15,6 @@
 		6EC73F291D18BB9C00224D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F271D18BB9C00224D46 /* LaunchScreen.storyboard */; };
 		6EC73F341D18BB9D00224D46 /* streakfeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F331D18BB9D00224D46 /* streakfeedTests.m */; };
 		6EC73F3F1D18BB9D00224D46 /* streakfeedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */; };
-		6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F4E1D18BE9F00224D46 /* RootViewController.m */; };
 		6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */; };
 		6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5A1D18C11E00224D46 /* ModelHelper.m */; };
 		6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5C1D18C11E00224D46 /* RESTHelper.m */; };
@@ -63,8 +62,6 @@
 		6EC73F3A1D18BB9D00224D46 /* streakfeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = streakfeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = streakfeedUITests.m; sourceTree = "<group>"; };
 		6EC73F401D18BB9D00224D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EC73F4D1D18BE9F00224D46 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ViewControllers/RootViewController.h; sourceTree = "<group>"; };
-		6EC73F4E1D18BE9F00224D46 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = ViewControllers/RootViewController.m; sourceTree = "<group>"; };
 		6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakFeedViewController.h; path = ViewControllers/StreakFeedViewController.h; sourceTree = "<group>"; };
 		6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakFeedViewController.m; path = ViewControllers/StreakFeedViewController.m; sourceTree = "<group>"; };
 		6EC73F551D18BF5F00224D46 /* kConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kConstants.h; path = constants/kConstants.h; sourceTree = "<group>"; };
@@ -200,8 +197,6 @@
 			children = (
 				6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */,
 				6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */,
-				6EC73F4D1D18BE9F00224D46 /* RootViewController.h */,
-				6EC73F4E1D18BE9F00224D46 /* RootViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -676,7 +671,6 @@
 				6EC73F691D18C1AA00224D46 /* PhotoModel.m in Sources */,
 				6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */,
 				6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */,
-				6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */,
 				6EC73F1B1D18BB9C00224D46 /* main.m in Sources */,
 				6EC73F701D18C1C100224D46 /* StreakCardTableViewCell.m in Sources */,
 				6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */,

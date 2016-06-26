@@ -15,6 +15,7 @@
 #import <NSDate+Helper.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIScrollView+InfiniteScroll.h>
+#import <MBProgressHUD.h>
 
 static NSInteger const kDaysFetchCount  = 1;
 static CGFloat const kTableCellHeight   = 80.0f;
@@ -25,8 +26,16 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 
 @interface StreakFeedViewController ()
 
-@property (atomic, strong) NSMutableArray *dateArray;
-@property (atomic, strong) NSMutableDictionary *dataDictionary;
+// uiviews for no connection found
+@property (nonatomic, strong) UILabel *noConnectionLabel;
+@property (nonatomic, strong) UIButton *retryConnectionButton;
+
+
+// constraints
+@property (nonatomic, strong) NSLayoutConstraint *vConstraintNoConnectionLabel;
+@property (nonatomic, strong) NSArray *vConstraintsLabelAndButton;
+@property (nonatomic, strong) NSArray *hConstraintsNoConnectionLabel;
+@property (nonatomic, strong) NSArray *hConstraintsRetryConnectionButton;
 
 
 @end
@@ -38,12 +47,6 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setup];
-    
-    
-    NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:kDaysFetchCount];
-    [self fetchDataWithDates:dates onCompletion:^(NSError *error) {
-        
-    }];;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -56,6 +59,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 - (void)setup {
     [self setupView];
     [self setupConstraints];
+    [self fetchInitialData];
 }
 
 - (void)setupView {
@@ -79,8 +83,115 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
                                                                         views:viewsDictionary]];
 }
 
+
+#pragma mark -
+#pragma mark - setup no connection views
+- (void)addNoConnectionViews {
+    // add views to viewcontroller if necessary
+    if (!_noConnectionLabel || ![_noConnectionLabel superview])
+        [self.view addSubview:[self noConnectionLabel]];
+    if (!_retryConnectionButton || ![_retryConnectionButton superview])
+        [self.view addSubview:[self retryConnectionButton]];
+    
+    
+    // setup constraints if necessary
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_noConnectionLabel, _retryConnectionButton);
+    NSDictionary *metrics = @{@"vLabel": @(120),
+                              @"vButton" : @(44)};
+    
+    // setup vertical constraints
+    if (!_vConstraintNoConnectionLabel) {
+        _vConstraintNoConnectionLabel = [NSLayoutConstraint constraintWithItem:_noConnectionLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.view
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.0f
+                                                                      constant:0.0];
+        
+        [self.view addConstraint:_vConstraintNoConnectionLabel];
+        
+    }
+    
+    if (!_vConstraintsLabelAndButton) {
+        _vConstraintsLabelAndButton = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_noConnectionLabel(vLabel)][_retryConnectionButton(vButton)]" options:0 metrics:metrics views:viewsDictionary];
+        
+        [self.view addConstraints:_vConstraintsLabelAndButton];
+    }
+
+    
+    // setup horizontal constraints
+    if (!_hConstraintsNoConnectionLabel) {
+        _hConstraintsNoConnectionLabel = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_noConnectionLabel]-|" options:0 metrics:metrics views:viewsDictionary];
+        
+        [self.view addConstraints:_hConstraintsNoConnectionLabel];
+    }
+
+    
+    if (!_hConstraintsRetryConnectionButton) {
+        _hConstraintsRetryConnectionButton = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_retryConnectionButton]-|" options:0 metrics:metrics views:viewsDictionary];
+        
+        [self.view addConstraints:_hConstraintsRetryConnectionButton];
+    }
+}
+
+- (void)removeNoConnectionViews {
+    if (_vConstraintNoConnectionLabel) {
+        [self.view removeConstraint:_vConstraintNoConnectionLabel];
+        _vConstraintNoConnectionLabel = nil;
+    }
+    
+    if (_vConstraintsLabelAndButton) {
+        [self.view removeConstraints:_vConstraintsLabelAndButton];
+        _vConstraintsLabelAndButton = nil;
+    }
+    
+    if (_hConstraintsNoConnectionLabel) {
+        [self.view removeConstraints:_hConstraintsNoConnectionLabel];
+        _hConstraintsNoConnectionLabel = nil;
+    }
+    
+    if (_hConstraintsRetryConnectionButton) {
+        [self.view removeConstraints:_hConstraintsRetryConnectionButton];
+        _hConstraintsRetryConnectionButton = nil;
+    }
+    
+    
+    if (_noConnectionLabel) {
+        if ([_noConnectionLabel superview]) [_noConnectionLabel removeFromSuperview];
+        _noConnectionLabel = nil;
+    }
+    
+    if (_retryConnectionButton) {
+        if ([_retryConnectionButton superview]) [_retryConnectionButton removeFromSuperview];
+        _retryConnectionButton = nil;
+    }
+}
+
+
+
 #pragma mark -
 #pragma mark - loadData
+- (void)fetchInitialData {
+    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    progressHud.mode = MBProgressHUDModeIndeterminate;
+    progressHud.labelText = NSLocalizedString(@"Loading...", nil);
+
+    NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:kDaysFetchCount];
+    [self fetchDataWithDates:dates onCompletion:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        if (error) {
+            _tableView.hidden = YES;
+            [self addNoConnectionViews];
+        } else {
+            _tableView.hidden = NO;
+            [self removeNoConnectionViews];
+        }
+    }];
+}
+
+
 - (void)fetchDataWithDates:(NSArray *)datesArray onCompletion:(CompletionWithErrorBlock)completion{
     [RESTHelper getDictionaryOfStreakCardsAndDateKeysForDates:datesArray onCompletion:^(NSDictionary *dictionary, NSError *error) {
         if (!error) {
@@ -202,12 +313,21 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
             [cell.photoImageView sd_setImageWithURL:photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 
             }];
+
         } else if (streakCard.location) {
             double latitude = [streakCard.location.latitude doubleValue];
             double longitude = [streakCard.location.longitude doubleValue];
-            NSString *staticMapURL = [NSString stringWithFormat:@"http://maps.google.com/maps/api/staticmap?markers=color:red|%f,%f&%@&sensor=true",latitude, longitude, @"zoom=10&size=270x70"];
+            long int mapHeight = lround(floorf(cell.contentView.bounds.size.height));
+            long int mapWidth = lround(floorf(cell.contentView.bounds.size.width * 0.5));
+            NSString *mapSize = [NSString stringWithFormat:@"zoom=10&size=%ldx%ld", mapWidth, mapHeight];
+            
+            NSString *staticMapURL = [NSString stringWithFormat:@"http://maps.google.com/maps/api/staticmap?markers=color:red|%f,%f&%@&sensor=true",latitude, longitude, mapSize];
+            
+            
             NSURL *mapURL = [NSURL URLWithString:[staticMapURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
             
+            [cell.photoImageView setShowActivityIndicatorView:YES];
+            [cell.photoImageView setIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [cell.photoImageView sd_setImageWithURL:mapURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 
             }];
@@ -305,6 +425,34 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     }
     
     return _tableView;
+}
+
+- (UILabel *)noConnectionLabel {
+    if (!_noConnectionLabel) {
+        _noConnectionLabel = [UILabel new];
+        _noConnectionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _noConnectionLabel.text = NSLocalizedString(@"No connection.", nil);
+        
+    }
+    
+    return _noConnectionLabel;
+}
+
+- (UIButton *)retryConnectionButton {
+    if (!_retryConnectionButton) {
+        _retryConnectionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _retryConnectionButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateNormal];
+        [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateReserved];
+        [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateSelected];
+        
+        [_retryConnectionButton addTarget:self
+                                   action:@selector(fetchInitialData)
+                         forControlEvents:UIControlEventTouchDown];
+    }
+    
+    return _retryConnectionButton;
 }
 
 @end
