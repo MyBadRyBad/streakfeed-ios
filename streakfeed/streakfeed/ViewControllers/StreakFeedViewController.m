@@ -21,6 +21,7 @@ static CGFloat const kTableCellHeight   = 80.0f;
 static CGFloat const kTableHeaderHeight = 60.0f;
 
 static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
+static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
 
 @interface StreakFeedViewController ()
 
@@ -131,17 +132,54 @@ static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
 #pragma mark -
 #pragma mark - UITableView data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = kTableViewCellStreakCardID;
     
-    StreakCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    NSDate *date = _dateArray[indexPath.section];
+    NSArray *cardArray = _dataDictionary[[date string]];
     
-    if (!cell) {
-        cell = [[StreakCardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    // show streak cards
+    if (cardArray && [cardArray count] > 0) {
+        StreakCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellStreakCardID];
+        
+        if (!cell) {
+            cell = [[StreakCardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                  reuseIdentifier:kTableViewCellStreakCardID];
+        }
+        
+        [self setupStreakCardTableViewCell:cell atIndexPath:indexPath];
+        
+        return cell;
+    } else { // show no streaks
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellEmptyID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kTableViewCellEmptyID];
+        }
+        
+        [self setupEmptyTableViewCell:cell atIndexPath:indexPath];
+        
+        return cell;
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [_dateArray count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSDate *date = _dateArray[section];
+    NSArray *cardArray = _dataDictionary[[date string]];
     
-    [self setupStreakCardTableViewCell:cell atIndexPath:indexPath];
-    
-    return cell;
+    return (cardArray && [cardArray count] > 0) ? [cardArray count] : 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kTableCellHeight;
+}
+
+#pragma mark -
+#pragma mark - setup cells
+- (void)setupEmptyTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    cell.textLabel.text = NSLocalizedString(@"No Streaks for Today", nil);
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 - (void)setupStreakCardTableViewCell:(StreakCardTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -152,9 +190,9 @@ static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
     if (streakCard) {
         NSString *streakTypeString = streakCard.streakType.type;
         NSString *startTimeString = [streakCard.streakType.start_at stringWithDateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-    
+        
         NSString *durationString = [NSString stringWithFormat:@"%ld min", lround([streakCard.streakType.stop_at timeIntervalSinceDate:streakCard.streakType.start_at] / 60)];
-    
+        
         cell.streakTypeLabel.text = streakTypeString;
         cell.startTimeLabel.text = startTimeString;
         cell.durationTypeLabel.text = durationString;
@@ -177,21 +215,6 @@ static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
             [cell.photoImageView setImage:nil];
         }
     }
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [_dateArray count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSDate *date = _dateArray[section];
-    NSArray *cardArray = _dataDictionary[[date string]];
-    
-    return (cardArray) ? [cardArray count] : 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kTableCellHeight;
 }
 
 #pragma mark -
@@ -249,6 +272,7 @@ static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [_tableView registerClass:[StreakCardTableViewCell class] forCellReuseIdentifier:kTableViewCellStreakCardID];
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kTableViewCellEmptyID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 
