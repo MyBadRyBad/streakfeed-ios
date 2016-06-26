@@ -18,9 +18,4 @@
                                     locationsDictionaryArray:(NSArray *)locationsArray
                                        photosDictionaryArray:(NSArray *)photosArray;
 
-+ (NSMutableDictionary *)streakCardsFromStreakTypeDictionaryArray:(NSArray *)streakTypeArray
-                                         locationsDictionaryArray:(NSArray *)locationsArray
-                                            photosDictionaryArray:(NSArray *)photosArray
-                                                        keysArray:(NSArray *)keysArray;
-
 @end

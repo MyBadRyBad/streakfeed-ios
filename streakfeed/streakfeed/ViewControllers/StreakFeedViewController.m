@@ -11,15 +11,22 @@
 #import "RESTHelper.h"
 #import "kErrorConstants.h"
 #import "StreakCardModel.h"
+#import <MapKit/MapKit.h>
 #import <NSDate+Helper.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIScrollView+InfiniteScroll.h>
 
-static NSInteger const kDaysFetchCount = 1;
-static CGFloat const kTableCellHeight = 80.0f;
+static NSInteger const kDaysFetchCount  = 1;
+static CGFloat const kTableCellHeight   = 80.0f;
+static CGFloat const kTableHeaderHeight = 60.0f;
+
+static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
 
 @interface StreakFeedViewController ()
 
 @property (atomic, strong) NSMutableArray *dateArray;
 @property (atomic, strong) NSMutableDictionary *dataDictionary;
+
 
 @end
 
@@ -33,7 +40,9 @@ static CGFloat const kTableCellHeight = 80.0f;
     
     
     NSMutableArray *dates = [self daysDaysFromStartDate:[NSDate date] daysCount:kDaysFetchCount];
-    [self fetchDataWithDates:dates];
+    [self fetchDataWithDates:dates onCompletion:^(NSError *error) {
+        
+    }];;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,10 +63,10 @@ static CGFloat const kTableCellHeight = 80.0f;
 
 - (void)setupConstraints {
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView);
-    NSDictionary *metrics = nil;
+    NSDictionary *metrics = @{@"vBuffer" : @(20)};
     
     // setup vertical constraints
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vBuffer-[_tableView]|"
                                                                       options:0
                                                                       metrics:metrics
                                                                         views:viewsDictionary]];
@@ -71,13 +80,13 @@ static CGFloat const kTableCellHeight = 80.0f;
 
 #pragma mark -
 #pragma mark - loadData
-- (void)fetchDataWithDates:(NSArray *)datesArray {
+- (void)fetchDataWithDates:(NSArray *)datesArray onCompletion:(CompletionWithErrorBlock)completion{
     [RESTHelper getDictionaryOfStreakCardsAndDateKeysForDates:datesArray onCompletion:^(NSDictionary *dictionary, NSError *error) {
         if (!error) {
             if (!_dateArray) _dateArray = [NSMutableArray new];
             if (!_dataDictionary) _dataDictionary = [NSMutableDictionary new];
             
-            [_dateArray addObjectsFromArray:[self dateArrayToKeys:datesArray]];
+            [_dateArray addObjectsFromArray:datesArray];
             [_dataDictionary addEntriesFromDictionary:dictionary];
             
             [_tableView reloadData];
@@ -87,24 +96,42 @@ static CGFloat const kTableCellHeight = 80.0f;
                                            message:error.localizedDescription
                                        actionTitle:kAlertCancelActionTitle];
         }
+        
+        if (completion) completion(error);
     }];
 }
 
 
 #pragma mark -
 #pragma mark - UITableView delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // do nothing
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return kTableHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return  nil;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width - (10 * 2), kTableHeaderHeight)];
+    label.textAlignment = NSTextAlignmentLeft;
+    label.textColor = [UIColor blackColor];
+    label.text = [_dateArray[section] stringWithFormat:@"MMMM d, yyyy"];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, kTableHeaderHeight)];
+    view.backgroundColor = [UIColor whiteColor];
+    [view addSubview:label];
+    
+    
+    return view;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [_tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 
 #pragma mark -
 #pragma mark - UITableView data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellID = @"StreakCardCell";
+    NSString *cellID = kTableViewCellStreakCardID;
     
     StreakCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
@@ -118,7 +145,8 @@ static CGFloat const kTableCellHeight = 80.0f;
 }
 
 - (void)setupStreakCardTableViewCell:(StreakCardTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSArray *cardArray = _dataDictionary[_dateArray[indexPath.section]];
+    NSDate *date = _dateArray[indexPath.section];
+    NSArray *cardArray = _dataDictionary[[date string]];
     StreakCardModel *streakCard = cardArray[indexPath.row];
     
     if (streakCard) {
@@ -130,6 +158,24 @@ static CGFloat const kTableCellHeight = 80.0f;
         cell.streakTypeLabel.text = streakTypeString;
         cell.startTimeLabel.text = startTimeString;
         cell.durationTypeLabel.text = durationString;
+        
+        if (streakCard.photo && streakCard.photo.url) {
+            NSURL *photoURL = [NSURL URLWithString:streakCard.photo.url];
+            [cell.photoImageView sd_setImageWithURL:photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+        } else if (streakCard.location) {
+            double latitude = [streakCard.location.latitude doubleValue];
+            double longitude = [streakCard.location.longitude doubleValue];
+            NSString *staticMapURL = [NSString stringWithFormat:@"http://maps.google.com/maps/api/staticmap?markers=color:red|%f,%f&%@&sensor=true",latitude, longitude, @"zoom=10&size=270x70"];
+            NSURL *mapURL = [NSURL URLWithString:[staticMapURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+            
+            [cell.photoImageView sd_setImageWithURL:mapURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+        } else {
+            [cell.photoImageView setImage:nil];
+        }
     }
 }
 
@@ -138,7 +184,8 @@ static CGFloat const kTableCellHeight = 80.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *cardArray = _dataDictionary[_dateArray[section]];
+    NSDate *date = _dateArray[section];
+    NSArray *cardArray = _dataDictionary[[date string]];
     
     return (cardArray) ? [cardArray count] : 0;
 }
@@ -165,19 +212,6 @@ static CGFloat const kTableCellHeight = 80.0f;
         return array;
         
     }
-    return nil;
-}
-
-- (NSMutableArray *)dateArrayToKeys:(NSArray *)dateArray {
-    if (dateArray) {
-        NSMutableArray *newArray = [NSMutableArray arrayWithCapacity:[dateArray count]];
-        for (NSDate *date in dateArray) {
-            [newArray addObject:[date string]];
-        }
-        
-        return newArray;
-    }
-    
     return nil;
 }
 
@@ -213,8 +247,37 @@ static CGFloat const kTableCellHeight = 80.0f;
         _tableView = [UITableView new];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [_tableView registerClass:[StreakCardTableViewCell class] forCellReuseIdentifier:kTableViewCellStreakCardID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+
+        if (!_dateArray) _dateArray = [NSMutableArray new];
+        if (!_dataDictionary) _dataDictionary = [NSMutableDictionary new];
+        
+        __weak typeof(_dateArray) dateArray = _dateArray;
+        __weak typeof(self) weakSelf = self;
+        [_tableView addInfiniteScrollWithHandler:^(UITableView* tableView) {
+            if (dateArray) {
+                // get previous days
+                NSDate *date = [dateArray lastObject];
+                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+                [dateComponents setDay:-1];
+                NSDate *previousDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+                NSMutableArray *previousDatesArray = [weakSelf daysDaysFromStartDate:previousDate daysCount:kDaysFetchCount];
+                
+                // fetch data
+                [weakSelf fetchDataWithDates:previousDatesArray onCompletion:^(NSError *error) {
+                    if (!error) [tableView reloadData];
+                    [tableView finishInfiniteScroll];
+                }];
+                
+            } else {
+                [tableView finishInfiniteScroll];
+            }
+            
+
+        }];
     }
     
     return _tableView;

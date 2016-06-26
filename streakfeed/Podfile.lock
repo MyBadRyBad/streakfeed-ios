@@ -15,15 +15,23 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - NSDate+Helper (1.0.4)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - UIScrollView-InfiniteScroll (0.8.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - NSDate+Helper
+  - SDWebImage (~> 3.8)
+  - UIScrollView-InfiniteScroll
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   NSDate+Helper: 78f517ac1c67914096433466fa7d20b812b9d86c
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  UIScrollView-InfiniteScroll: afd22fc0e230436a27c5b8b44c0857cb5bd3716a
 
-PODFILE CHECKSUM: 1d9e7e14285f6456f2d688a0bd43e4d7d957f19e
+PODFILE CHECKSUM: 65391145954b9dd36f5405904ce6764b0319d313
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1

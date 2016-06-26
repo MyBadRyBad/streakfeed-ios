@@ -13,6 +13,7 @@
 /////////////////////////////
 typedef void (^CompletionWithDictionaryBlock)(NSDictionary *dictionary, NSError *error);
 typedef void (^CompletionWithArrayBlock)(NSArray *array, NSError *error);
+typedef void (^CompletionWithErrorBlock)(NSError *error);
 
 @interface RESTHelper : NSObject
 
