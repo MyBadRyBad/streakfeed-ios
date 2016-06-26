@@ -7,8 +7,10 @@
 //
 
 #import "StreakCardTableViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kLabelHeight = 16.0f;
+static CGFloat kVerticalMargin = 4.0f;
+static CGFloat kHorizontalMargin = 4.0f;
 
 @interface StreakCardTableViewCell()
 
@@ -21,7 +23,6 @@ static CGFloat const kLabelHeight = 16.0f;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self setup];
         [self setup];
     }
     
@@ -60,52 +61,36 @@ static CGFloat const kLabelHeight = 16.0f;
 - (void)setup {
     [self setupView];
     [self setupConstraints];
+    
+    _streakCardView.alpha = 1.0f;
+    _streakCardView.layer.masksToBounds = NO;
+    _streakCardView.layer.cornerRadius = 1.5;
+    _streakCardView.layer.shadowOffset = CGSizeMake(-.2f, .2f);
+    _streakCardView.layer.shadowRadius = 2;
+    _streakCardView.layer.shadowOpacity = 0.2;
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:_streakCardView.bounds];
+    _streakCardView.layer.shadowPath = path.CGPath;
 }
 
 
 - (void)setupView {
-    [self.contentView addSubview:[self streakTypeLabel]];
-    [self.contentView addSubview:[self durationTypeLabel]];
-    [self.contentView addSubview:[self startTimeLabel]];
-    
-    [self.contentView addSubview:[self photoImageView]];
+    [self.contentView addSubview:[self streakCardView]];
 }
 
 
 
 - (void)setupConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_streakTypeLabel, _durationTypeLabel, _startTimeLabel, _photoImageView);
-    NSDictionary *metrics = @{@"vLabel" : @(kLabelHeight)};
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_streakCardView);
+    NSDictionary *metrics = @{@"hStreakCardView" : @(kHorizontalMargin),
+                              @"vStreakCardView" : @(kVerticalMargin)};
     
-    // add vertical constraints
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_durationTypeLabel
-                                                                 attribute:NSLayoutAttributeCenterY
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.contentView
-                                                                 attribute:NSLayoutAttributeCenterY
-                                                                multiplier:1.0f
-                                                                  constant:0.0f]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_streakTypeLabel(vLabel)][_durationTypeLabel(vLabel)][_startTimeLabel(vLabel)]" options:0 metrics:metrics views:viewDictionary]];
-                                      
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
+    // setup vertical constraints
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vStreakCardView-[_streakCardView]-vStreakCardView-|" options:0 metrics:metrics views:viewsDictionary]];
     
     
-    // add horizontal constraints
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_photoImageView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.contentView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                multiplier:0.50f
-                                                                  constant:0.0f]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_streakTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
-
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_durationTypeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_startTimeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
-    
+    // setup horizontal constraints
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hStreakCardView-[_streakCardView]|" options:0 metrics:metrics views:viewsDictionary]];
     
 }
 
@@ -126,40 +111,12 @@ static CGFloat const kLabelHeight = 16.0f;
 
 #pragma mark -
 #pragma mark - getter methods
-- (UILabel *)streakTypeLabel {
-    if (!_streakTypeLabel) {
-        _streakTypeLabel = [UILabel new];
-        _streakTypeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+- (StreakCardView *)streakCardView {
+    if (!_streakCardView) {
+        _streakCardView = [[StreakCardView alloc] init];
+        _streakCardView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
-    return _streakTypeLabel;
-}
-
-- (UILabel *)durationTypeLabel {
-    if (!_durationTypeLabel) {
-        _durationTypeLabel = [UILabel new];
-        _durationTypeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    
-    return _durationTypeLabel;
-}
-
-- (UILabel *)startTimeLabel {
-    if (!_startTimeLabel) {
-        _startTimeLabel = [UILabel new];
-        _startTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    
-    return _startTimeLabel;
-}
-
-- (UIImageView *)photoImageView {
-    if (!_photoImageView) {
-        _photoImageView = [UIImageView new];
-        _photoImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        _photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    
-    return _photoImageView;
+    return _streakCardView;
 }
 @end

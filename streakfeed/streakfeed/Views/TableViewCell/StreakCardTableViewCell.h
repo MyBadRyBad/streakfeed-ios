@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
+#import "StreakCardView.h"
 
 @interface StreakCardTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *streakTypeLabel;
-@property (nonatomic, strong) UILabel *durationTypeLabel;
-@property (nonatomic, strong) UILabel *startTimeLabel;
-
-@property (nonatomic, strong) UIImageView *photoImageView;
+@property (nonatomic, strong) StreakCardView *streakCardView;
 
 @end

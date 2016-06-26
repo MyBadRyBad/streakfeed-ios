@@ -18,7 +18,7 @@
 #import <MBProgressHUD.h>
 
 static NSInteger const kDaysFetchCount  = 1;
-static CGFloat const kTableCellHeight   = 80.0f;
+static CGFloat const kTableCellHeight   = 100.0f;
 static CGFloat const kTableHeaderHeight = 60.0f;
 
 static NSString *const kTableViewCellStreakCardID = @"StreakCardCell";
@@ -322,14 +322,18 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         
         NSString *durationString = [NSString stringWithFormat:@"%ld min", lround([streakCard.streakType.stop_at timeIntervalSinceDate:streakCard.streakType.start_at] / 60)];
         
-        cell.streakTypeLabel.text = streakTypeString;
-        cell.startTimeLabel.text = startTimeString;
-        cell.durationTypeLabel.text = durationString;
+        cell.streakCardView.streakTypeLabel.text = streakTypeString;
+        cell.streakCardView.startTimeLabel.text = startTimeString;
+        cell.streakCardView.durationTypeLabel.text = durationString;
+        [cell.streakCardView setBackgroundColorWithStreakType:streakTypeString];
         
+        // setup photos if necessary
         if (streakCard.photo && streakCard.photo.url) {
             NSURL *photoURL = [NSURL URLWithString:streakCard.photo.url];
-            [cell.photoImageView sd_setImageWithURL:photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
+            [cell.streakCardView.photoImageView sd_setImageWithURL:photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (!error) {
+                    [cell.streakCardView.photoImageView setAlignRight:YES];
+                }
             }];
 
         } else if (streakCard.location) {
@@ -344,13 +348,15 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
             
             NSURL *mapURL = [NSURL URLWithString:[staticMapURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
             
-            [cell.photoImageView setShowActivityIndicatorView:YES];
-            [cell.photoImageView setIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            [cell.photoImageView sd_setImageWithURL:mapURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
+            [cell.streakCardView.photoImageView setShowActivityIndicatorView:YES];
+            [cell.streakCardView.photoImageView setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [cell.streakCardView.photoImageView sd_setImageWithURL:mapURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (!error) {
+                    [cell.streakCardView.photoImageView setAlignRight:YES];
+                }
             }];
         } else {
-            [cell.photoImageView setImage:nil];
+            [cell.streakCardView.photoImageView setImage:nil];
         }
     }
 }
@@ -408,6 +414,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         _tableView = [UITableView new];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorColor = [UIColor clearColor];
         
         [_tableView registerClass:[StreakCardTableViewCell class] forCellReuseIdentifier:kTableViewCellStreakCardID];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kTableViewCellEmptyID];
