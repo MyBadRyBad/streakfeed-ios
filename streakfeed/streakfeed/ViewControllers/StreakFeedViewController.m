@@ -19,6 +19,7 @@
 #import <UIScrollView+InfiniteScroll.h>
 #import <MBProgressHUD.h>
 #import <QuartzCore/QuartzCore.h>
+#import <IonIcons.h>
 
 static NSInteger const kDaysFetchCount  = 1;
 static CGFloat const kTableCellHeight   = 100.0f;
@@ -365,27 +366,27 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         // setup photos if necessary
         if (streakCard.photo && streakCard.photo.url) {
             NSURL *photoURL = [NSURL URLWithString:streakCard.photo.url];
-            [cell.streakCardView.photoImageView sd_setImageWithURL:photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (!error) {
-                    [cell.streakCardView.photoImageView setAlignRight:YES];
-                }
-            }];
+            [self setupStreakCardCell:cell withPhotoURL:photoURL];
 
         } else if (streakCard.location) {
-            double latitude = [streakCard.location.latitude doubleValue];
-            double longitude = [streakCard.location.longitude doubleValue];
             long int mapHeight = lround(floorf(cell.contentView.bounds.size.height));
             long int mapWidth = lround(floorf(cell.contentView.bounds.size.width * 0.5));
-            NSString *mapSize = [NSString stringWithFormat:@"zoom=10&size=%ldx%ld", mapWidth, mapHeight];
             
-            NSString *staticMapURL = [NSString stringWithFormat:@"http://maps.google.com/maps/api/staticmap?markers=color:red|%f,%f&%@&sensor=true",latitude, longitude, mapSize];
-            
-            
-            NSURL *mapURL = [NSURL URLWithString:[staticMapURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
-            
+            NSURL *locationURL = [self mapURLFromLocationModel:streakCard.location mapHeight:mapHeight mapWidth:mapWidth];
+            [self setupStreakCardCell:cell withPhotoURL:locationURL];
+        } else {
+            [cell.streakCardView.photoImageView setImage:nil];
+        }
+    }
+}
+
+- (void)setupStreakCardCell:(StreakCardTableViewCell *)cell withPhotoURL:(NSURL *)url {
+    if (cell) {
+        if (url) {
             [cell.streakCardView.photoImageView setShowActivityIndicatorView:YES];
             [cell.streakCardView.photoImageView setIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            [cell.streakCardView.photoImageView sd_setImageWithURL:mapURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.streakCardView.photoImageView sd_setImageWithURL:url
+                                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (!error) {
                     [cell.streakCardView.photoImageView setAlignRight:YES];
                 }
@@ -394,6 +395,20 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
             [cell.streakCardView.photoImageView setImage:nil];
         }
     }
+}
+
+- (NSURL *)mapURLFromLocationModel:(LocationModel *)location
+                         mapHeight:(long int)mapHeight
+                          mapWidth:(long int)mapWidth{
+    double latitude = [location.latitude doubleValue];
+    double longitude = [location.longitude doubleValue];
+    NSString *mapSize = [NSString stringWithFormat:@"zoom=10&size=%ldx%ld", mapWidth, mapHeight];
+    
+    NSString *staticMapURL = [NSString stringWithFormat:@"http://maps.google.com/maps/api/staticmap?markers=color:red|%f,%f&%@&sensor=true",latitude, longitude, mapSize];
+    
+    NSURL *mapURL = [NSURL URLWithString:[staticMapURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+    
+    return mapURL;
 }
 
 #pragma mark -
