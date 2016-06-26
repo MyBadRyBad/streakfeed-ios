@@ -18,6 +18,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIScrollView+InfiniteScroll.h>
 #import <MBProgressHUD.h>
+#import <QuartzCore/QuartzCore.h>
 
 static NSInteger const kDaysFetchCount  = 1;
 static CGFloat const kTableCellHeight   = 100.0f;
@@ -129,8 +130,9 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     // setup constraints if necessary
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_noConnectionLabel, _retryConnectionButton, self.view);
     NSDictionary *metrics = @{@"vLabel": @(20),
-                              @"vButton" : @(44),
-                              @"hButton" : @(80)};
+                              @"vButton" : @(36),
+                              @"hButton" : @(80),
+                              @"vBuffer" : @(12)};
     
     // setup vertical constraints
     if (!_vConstraintNoConnectionLabel) {
@@ -147,7 +149,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     }
 
     if (!_vConstraintsLabelAndButton) {
-        _vConstraintsLabelAndButton = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_noConnectionLabel(vLabel)][_retryConnectionButton(vButton)]" options:0 metrics:metrics views:viewsDictionary];
+        _vConstraintsLabelAndButton = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_noConnectionLabel(vLabel)]-vBuffer-[_retryConnectionButton(vButton)]" options:0 metrics:metrics views:viewsDictionary];
         
         [self.view addConstraints:_vConstraintsLabelAndButton];
     }
@@ -500,8 +502,10 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         _noConnectionLabel = [UILabel new];
         _noConnectionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _noConnectionLabel.text = NSLocalizedString(@"No connection.", nil);
+        _noConnectionLabel.text = NSLocalizedString(@"Could not connect to server.", nil);
         _noConnectionLabel.textAlignment = NSTextAlignmentCenter;
+        _noConnectionLabel.font = [UIFont fontWithName:GLOBAL_FONT_NAME size:GLOBAL_FONT_SIZE_NAV_BAR];
+        _noConnectionLabel.textColor = [UIColor navigationBarColor];
         
     }
     
@@ -512,12 +516,17 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
     if (!_retryConnectionButton) {
         _retryConnectionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _retryConnectionButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _retryConnectionButton.titleLabel.font = [UIFont fontWithName:GLOBAL_FONT_NAME size:GLOBAL_FONT_SIZE_CARD];
         [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateNormal];
         [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateHighlighted];
         [_retryConnectionButton setTitle:NSLocalizedString(@"Retry", nil) forState:UIControlStateSelected];
-        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [_retryConnectionButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_retryConnectionButton setTitleColor:[UIColor navigationBarColor] forState:UIControlStateNormal];
+        [_retryConnectionButton setTitleColor:[UIColor navigationBarColor] forState:UIControlStateHighlighted];
+        [_retryConnectionButton setTitleColor:[UIColor navigationBarColor] forState:UIControlStateSelected];
+        
+        _retryConnectionButton.layer.borderWidth = 0.5f;
+        _retryConnectionButton.layer.cornerRadius = 10.0f;
+        _retryConnectionButton.layer.borderColor = [[UIColor navigationBarColor] CGColor];
         
         [_retryConnectionButton addTarget:self
                                    action:@selector(fetchInitialData)
