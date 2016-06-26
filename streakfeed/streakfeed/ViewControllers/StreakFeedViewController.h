@@ -12,5 +12,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (atomic, strong) NSMutableArray *dateArray;
+@property (atomic, strong) NSMutableDictionary *dataDictionary;
 
 @end

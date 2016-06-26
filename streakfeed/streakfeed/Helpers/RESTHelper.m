@@ -237,7 +237,7 @@
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"NSURLSessionDataTask Error: %@", error);
-            
+            onCompletion(nil, error);
         } else {
             NSLog(@"%@ %@", response, responseObject);
             

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2673C162B6545EBDE84C685F /* libPods-streakfeedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C1E8E376A18E6B1E47E103 /* libPods-streakfeedTests.a */; };
+		6E6F72521D208305005E8A03 /* Source Sans Pro regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */; };
 		6EC73F1B1D18BB9C00224D46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1A1D18BB9C00224D46 /* main.m */; };
 		6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F1D1D18BB9C00224D46 /* AppDelegate.m */; };
 		6EC73F241D18BB9C00224D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F221D18BB9C00224D46 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		6EC73F291D18BB9C00224D46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC73F271D18BB9C00224D46 /* LaunchScreen.storyboard */; };
 		6EC73F341D18BB9D00224D46 /* streakfeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F331D18BB9D00224D46 /* streakfeedTests.m */; };
 		6EC73F3F1D18BB9D00224D46 /* streakfeedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */; };
-		6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F4E1D18BE9F00224D46 /* RootViewController.m */; };
 		6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */; };
 		6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5A1D18C11E00224D46 /* ModelHelper.m */; };
 		6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F5C1D18C11E00224D46 /* RESTHelper.m */; };
@@ -24,6 +24,15 @@
 		6EC73F6A1D18C1AA00224D46 /* StreakCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F651D18C1AA00224D46 /* StreakCardModel.m */; };
 		6EC73F6B1D18C1AA00224D46 /* StreakTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F671D18C1AA00224D46 /* StreakTypeModel.m */; };
 		6EC73F701D18C1C100224D46 /* StreakCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC73F6F1D18C1C100224D46 /* StreakCardTableViewCell.m */; };
+		6EDE51961D1FA84900C95E37 /* StreakCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE51951D1FA84900C95E37 /* StreakCardView.m */; };
+		6EDE519B1D1FAEC400C95E37 /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE519A1D1FAEC400C95E37 /* UIImageViewAligned.m */; };
+		6EDE51A11D1FB14000C95E37 /* UIColor+StreakFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE51A01D1FB14000C95E37 /* UIColor+StreakFeed.m */; };
+		6EDE51AF1D1FBE4600C95E37 /* Source Sans Pro 200.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */; };
+		6EDE51B01D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */; };
+		6EDE51B11D1FBE4600C95E37 /* Source Sans Pro 300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */; };
+		6EDE51B21D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */; };
+		6EDE51B31D1FBE4600C95E37 /* Source Sans Pro 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */; };
+		6EDE51B41D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */; };
 		8221BE5928D6B55B8918B540 /* libPods-streakfeed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */; };
 		D55C18DBB2A457EF251FD52A /* libPods-streakfeedUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */; };
 /* End PBXBuildFile section */
@@ -49,6 +58,7 @@
 		334A1C6C3206CF7137D621CE /* Pods-streakfeedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedTests/Pods-streakfeedTests.release.xcconfig"; sourceTree = "<group>"; };
 		43C1E8E376A18E6B1E47E103 /* libPods-streakfeedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE85C07A013BE228582AA92 /* libPods-streakfeedUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeedUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro regular.ttf"; path = "fonts/Source Sans Pro regular.ttf"; sourceTree = "<group>"; };
 		6EC73F161D18BB9C00224D46 /* streakfeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = streakfeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC73F1A1D18BB9C00224D46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6EC73F1C1D18BB9C00224D46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,8 +73,6 @@
 		6EC73F3A1D18BB9D00224D46 /* streakfeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = streakfeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC73F3E1D18BB9D00224D46 /* streakfeedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = streakfeedUITests.m; sourceTree = "<group>"; };
 		6EC73F401D18BB9D00224D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EC73F4D1D18BE9F00224D46 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ViewControllers/RootViewController.h; sourceTree = "<group>"; };
-		6EC73F4E1D18BE9F00224D46 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = ViewControllers/RootViewController.m; sourceTree = "<group>"; };
 		6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakFeedViewController.h; path = ViewControllers/StreakFeedViewController.h; sourceTree = "<group>"; };
 		6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakFeedViewController.m; path = ViewControllers/StreakFeedViewController.m; sourceTree = "<group>"; };
 		6EC73F551D18BF5F00224D46 /* kConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kConstants.h; path = constants/kConstants.h; sourceTree = "<group>"; };
@@ -84,6 +92,18 @@
 		6EC73F671D18C1AA00224D46 /* StreakTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakTypeModel.m; path = Models/StreakTypeModel.m; sourceTree = "<group>"; };
 		6EC73F6E1D18C1C100224D46 /* StreakCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakCardTableViewCell.h; path = Views/TableViewCell/StreakCardTableViewCell.h; sourceTree = "<group>"; };
 		6EC73F6F1D18C1C100224D46 /* StreakCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakCardTableViewCell.m; path = Views/TableViewCell/StreakCardTableViewCell.m; sourceTree = "<group>"; };
+		6EDE51941D1FA84900C95E37 /* StreakCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreakCardView.h; path = Views/StreakCard/StreakCardView.h; sourceTree = "<group>"; };
+		6EDE51951D1FA84900C95E37 /* StreakCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreakCardView.m; path = Views/StreakCard/StreakCardView.m; sourceTree = "<group>"; };
+		6EDE51991D1FAEC400C95E37 /* UIImageViewAligned.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageViewAligned.h; path = OpenSource/UIImageViewAligned.h; sourceTree = "<group>"; };
+		6EDE519A1D1FAEC400C95E37 /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewAligned.m; path = OpenSource/UIImageViewAligned.m; sourceTree = "<group>"; };
+		6EDE519F1D1FB14000C95E37 /* UIColor+StreakFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+StreakFeed.h"; path = "Helpers/UIColor+StreakFeed.h"; sourceTree = "<group>"; };
+		6EDE51A01D1FB14000C95E37 /* UIColor+StreakFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+StreakFeed.m"; path = "Helpers/UIColor+StreakFeed.m"; sourceTree = "<group>"; };
+		6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200.ttf"; path = "fonts/Source Sans Pro 200.ttf"; sourceTree = "<group>"; };
+		6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 200italic.ttf"; path = "fonts/Source Sans Pro 200italic.ttf"; sourceTree = "<group>"; };
+		6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300.ttf"; path = "fonts/Source Sans Pro 300.ttf"; sourceTree = "<group>"; };
+		6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 300italic.ttf"; path = "fonts/Source Sans Pro 300italic.ttf"; sourceTree = "<group>"; };
+		6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600.ttf"; path = "fonts/Source Sans Pro 600.ttf"; sourceTree = "<group>"; };
+		6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Source Sans Pro 600italic.ttf"; path = "fonts/Source Sans Pro 600italic.ttf"; sourceTree = "<group>"; };
 		7AB9534AD873A7840D8A5558 /* libPods-streakfeed.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-streakfeed.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB27FBC62969841A2921CA1 /* Pods-streakfeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeed/Pods-streakfeed.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0444381AF87E9CEC1B5139 /* Pods-streakfeedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streakfeedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-streakfeedUITests/Pods-streakfeedUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,13 +165,14 @@
 		6EC73F181D18BB9C00224D46 /* streakfeed */ = {
 			isa = PBXGroup;
 			children = (
+				6EDE51981D1FAE7100C95E37 /* Storyboard */,
 				6EC73F4C1D18BE7700224D46 /* AppDelegate */,
 				6EC73F541D18BF5100224D46 /* Constants */,
 				6EC73F581D18C0D400224D46 /* Helpers */,
 				6EC73F5F1D18C12A00224D46 /* Models */,
 				6EC73F6C1D18C1B200224D46 /* Views */,
 				6EC73F531D18BED000224D46 /* ViewControllers */,
-				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
+				6EDE51971D1FAE6800C95E37 /* OpenSource */,
 				6EC73F251D18BB9C00224D46 /* Assets.xcassets */,
 				6EC73F271D18BB9C00224D46 /* LaunchScreen.storyboard */,
 				6EC73F2A1D18BB9C00224D46 /* Info.plist */,
@@ -163,6 +184,7 @@
 		6EC73F191D18BB9C00224D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6EDE51A21D1FBE3B00C95E37 /* fonts */,
 				6EC73F1A1D18BB9C00224D46 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -200,8 +222,6 @@
 			children = (
 				6EC73F501D18BEC800224D46 /* StreakFeedViewController.h */,
 				6EC73F511D18BEC800224D46 /* StreakFeedViewController.m */,
-				6EC73F4D1D18BE9F00224D46 /* RootViewController.h */,
-				6EC73F4E1D18BE9F00224D46 /* RootViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -223,6 +243,8 @@
 				6EC73F5A1D18C11E00224D46 /* ModelHelper.m */,
 				6EC73F5B1D18C11E00224D46 /* RESTHelper.h */,
 				6EC73F5C1D18C11E00224D46 /* RESTHelper.m */,
+				6EDE519F1D1FB14000C95E37 /* UIColor+StreakFeed.h */,
+				6EDE51A01D1FB14000C95E37 /* UIColor+StreakFeed.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -245,6 +267,7 @@
 		6EC73F6C1D18C1B200224D46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6EDE51931D1FA82D00C95E37 /* StreakCard */,
 				6EC73F6D1D18C1B600224D46 /* TableViewCell */,
 			);
 			name = Views;
@@ -257,6 +280,46 @@
 				6EC73F6F1D18C1C100224D46 /* StreakCardTableViewCell.m */,
 			);
 			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		6EDE51931D1FA82D00C95E37 /* StreakCard */ = {
+			isa = PBXGroup;
+			children = (
+				6EDE51941D1FA84900C95E37 /* StreakCardView.h */,
+				6EDE51951D1FA84900C95E37 /* StreakCardView.m */,
+			);
+			name = StreakCard;
+			sourceTree = "<group>";
+		};
+		6EDE51971D1FAE6800C95E37 /* OpenSource */ = {
+			isa = PBXGroup;
+			children = (
+				6EDE51991D1FAEC400C95E37 /* UIImageViewAligned.h */,
+				6EDE519A1D1FAEC400C95E37 /* UIImageViewAligned.m */,
+			);
+			name = OpenSource;
+			sourceTree = "<group>";
+		};
+		6EDE51981D1FAE7100C95E37 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				6EC73F221D18BB9C00224D46 /* Main.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		6EDE51A21D1FBE3B00C95E37 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6E6F72511D208305005E8A03 /* Source Sans Pro regular.ttf */,
+				6EDE51A31D1FBE4600C95E37 /* Source Sans Pro 200.ttf */,
+				6EDE51A41D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf */,
+				6EDE51A51D1FBE4600C95E37 /* Source Sans Pro 300.ttf */,
+				6EDE51A61D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf */,
+				6EDE51A71D1FBE4600C95E37 /* Source Sans Pro 600.ttf */,
+				6EDE51A81D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 		915574B74E9E50D94037508A /* Frameworks */ = {
@@ -401,9 +464,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDE51B31D1FBE4600C95E37 /* Source Sans Pro 600.ttf in Resources */,
+				6EDE51B01D1FBE4600C95E37 /* Source Sans Pro 200italic.ttf in Resources */,
+				6E6F72521D208305005E8A03 /* Source Sans Pro regular.ttf in Resources */,
+				6EDE51AF1D1FBE4600C95E37 /* Source Sans Pro 200.ttf in Resources */,
 				6EC73F291D18BB9C00224D46 /* LaunchScreen.storyboard in Resources */,
+				6EDE51B21D1FBE4600C95E37 /* Source Sans Pro 300italic.ttf in Resources */,
 				6EC73F261D18BB9C00224D46 /* Assets.xcassets in Resources */,
+				6EDE51B41D1FBE4600C95E37 /* Source Sans Pro 600italic.ttf in Resources */,
 				6EC73F241D18BB9C00224D46 /* Main.storyboard in Resources */,
+				6EDE51B11D1FBE4600C95E37 /* Source Sans Pro 300.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,9 +745,11 @@
 				6EC73F521D18BEC800224D46 /* StreakFeedViewController.m in Sources */,
 				6EC73F691D18C1AA00224D46 /* PhotoModel.m in Sources */,
 				6EC73F1E1D18BB9C00224D46 /* AppDelegate.m in Sources */,
+				6EDE51961D1FA84900C95E37 /* StreakCardView.m in Sources */,
 				6EC73F5D1D18C11E00224D46 /* ModelHelper.m in Sources */,
-				6EC73F4F1D18BE9F00224D46 /* RootViewController.m in Sources */,
+				6EDE51A11D1FB14000C95E37 /* UIColor+StreakFeed.m in Sources */,
 				6EC73F1B1D18BB9C00224D46 /* main.m in Sources */,
+				6EDE519B1D1FAEC400C95E37 /* UIImageViewAligned.m in Sources */,
 				6EC73F701D18C1C100224D46 /* StreakCardTableViewCell.m in Sources */,
 				6EC73F5E1D18C11E00224D46 /* RESTHelper.m in Sources */,
 				6EC73F6A1D18C1AA00224D46 /* StreakCardModel.m in Sources */,
