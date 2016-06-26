@@ -326,6 +326,7 @@ static NSString *const kTableViewCellEmptyID = @"EmptyTableViewCell";
         cell.streakCardView.startTimeLabel.text = startTimeString;
         cell.streakCardView.durationTypeLabel.text = durationString;
         [cell.streakCardView setBackgroundColorWithStreakType:streakTypeString];
+
         
         // setup photos if necessary
         if (streakCard.photo && streakCard.photo.url) {

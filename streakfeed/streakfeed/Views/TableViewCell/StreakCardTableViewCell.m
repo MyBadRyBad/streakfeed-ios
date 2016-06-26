@@ -57,20 +57,16 @@ static CGFloat kHorizontalMargin = 4.0f;
 }
 
 #pragma mark -
+#pragma mark - layout
+- (void)layoutSubviews {
+   // [self setupShadows];
+}
+
+#pragma mark -
 #pragma mark - setup
 - (void)setup {
     [self setupView];
     [self setupConstraints];
-    
-    _streakCardView.alpha = 1.0f;
-    _streakCardView.layer.masksToBounds = NO;
-    _streakCardView.layer.cornerRadius = 1.5;
-    _streakCardView.layer.shadowOffset = CGSizeMake(-.2f, .2f);
-    _streakCardView.layer.shadowRadius = 2;
-    _streakCardView.layer.shadowOpacity = 0.2;
-    
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:_streakCardView.bounds];
-    _streakCardView.layer.shadowPath = path.CGPath;
 }
 
 
@@ -92,6 +88,17 @@ static CGFloat kHorizontalMargin = 4.0f;
     // setup horizontal constraints
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hStreakCardView-[_streakCardView]|" options:0 metrics:metrics views:viewsDictionary]];
     
+}
+
+- (void)setupShadows {
+    _streakCardView.layer.masksToBounds = NO;
+    _streakCardView.layer.cornerRadius = 1;
+    _streakCardView.layer.shadowOffset = CGSizeMake(-.2f, .2f);
+    _streakCardView.layer.shadowRadius = 1;
+    _streakCardView.layer.shadowOpacity = 0.2;
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:_streakCardView.bounds];
+    _streakCardView.layer.shadowPath = path.CGPath;
 }
 
 #pragma mark -

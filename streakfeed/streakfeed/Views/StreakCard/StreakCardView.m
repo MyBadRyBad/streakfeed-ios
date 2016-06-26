@@ -9,6 +9,7 @@
 #import "StreakCardView.h"
 #import "UIColor+StreakFeed.h"
 #import "kConstants.h"
+#import <QuartzCore/QuartzCore.h>
 
 static CGFloat const kLabelHeight = 16.0f;
 
@@ -44,12 +45,17 @@ static CGFloat const kLabelHeight = 16.0f;
 }
 
 #pragma mark -
+#pragma mark - layout
+- (void)layoutSubviews {
+    [self setupShadows];
+}
+
+
+#pragma mark -
 #pragma mark - setup
 - (void)setup {
     [self setupView];
     [self setupConstraints];
-    
-    self.backgroundColor = [UIColor grayColor];
 }
 
 
@@ -65,7 +71,8 @@ static CGFloat const kLabelHeight = 16.0f;
 
 - (void)setupConstraints {
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_streakTypeLabel, _durationTypeLabel, _startTimeLabel, _photoImageView);
-    NSDictionary *metrics = @{@"vLabel" : @(kLabelHeight)};
+    NSDictionary *metrics = @{@"vLabel" : @(kLabelHeight),
+                              @"vBuffer" :@(4)};
     
     // add vertical constraints
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_durationTypeLabel
@@ -76,7 +83,7 @@ static CGFloat const kLabelHeight = 16.0f;
                                                     multiplier:1.0f
                                                       constant:0.0f]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_streakTypeLabel(vLabel)][_durationTypeLabel(vLabel)][_startTimeLabel(vLabel)]" options:0 metrics:metrics views:viewDictionary]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_streakTypeLabel(vLabel)]-vBuffer-[_durationTypeLabel(vLabel)]-vBuffer-[_startTimeLabel(vLabel)]" options:0 metrics:metrics views:viewDictionary]];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
@@ -97,6 +104,17 @@ static CGFloat const kLabelHeight = 16.0f;
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_startTimeLabel][_photoImageView]|" options:0 metrics:metrics views:viewDictionary]];
     
     
+}
+
+- (void)setupShadows {
+    self.layer.masksToBounds = NO;
+    self.layer.cornerRadius = 1;
+    self.layer.shadowOffset = CGSizeMake(0, .5f);
+    self.layer.shadowRadius = 1;
+    self.layer.shadowOpacity = 0.4;
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.bounds];
+    self.layer.shadowPath = path.CGPath;
 }
 
 #pragma mark -
