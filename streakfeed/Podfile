@@ -10,6 +10,7 @@ target 'streakfeed' do
   pod 'NSDate+Helper'
   pod 'SDWebImage', '~>3.8'
   pod 'UIScrollView-InfiniteScroll'
+  pod 'MBProgressHUD', '~> 0.9.2'
 
   target 'streakfeedTests' do
     inherit! :search_paths
