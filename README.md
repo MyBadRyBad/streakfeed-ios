@@ -14,9 +14,6 @@ Project for Spire Streaks Feed Challenge
 ##Mockup
 ![mockup](assets/iOS_challenge_v1_mock_up.png)
 
-##Demo
-![demo](assets/demo.gif)
-
 ##TODO for Production
 * Unit Testing - I started building and writing code as I went along.
 * Proper Code Documentation - Currently no documentation in code.
@@ -25,4 +22,7 @@ Project for Spire Streaks Feed Challenge
 * Data Persistence - Currently no data persistence. App needs to always pull data from the server. 
 * Switch between Production, Staging, and Development URLS
 * Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server, which will be an issue for very large amounts of data. Should spend some time optimizing
-* tableview optimizations - Used some open source to pull some data in background, but there are definitely some ways to allow for more efficient lazy loading. 
+* tableview optimizations - Used some open source to pull some data in background, but the tableview still slightly lags when scrolling, so some expensive calls are still occurring in the main thread.
+
+##Demo
+![demo](assets/demo.gif)
