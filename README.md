@@ -1,5 +1,5 @@
 # streakfeed-ios
-=====
+=========================
 
 Project for Spire Streaks Feed Challenge
 
@@ -16,3 +16,13 @@ Project for Spire Streaks Feed Challenge
 
 ##Demo
 ![demo](assets/demo.gif)
+
+##TODO for Production
+* Unit Testing - I started building and writing code as I went along.
+* Proper Code Documentation - Currently no documentation in code.
+* Local Test Data - Currently pulling from REST server and using that as my sole data source.
+* Error handling - Currently displaying a generic error message for all errors
+* Data Persistence - Currently no data persistence. App needs to always pull data from the server. 
+* Switch between Production, Staging, and Development URLS
+* Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server. Should spend some time optimizing
+* tableview optimizations - Used some open source to pull some data in background. Should figure out some more ways to lazy load data.
