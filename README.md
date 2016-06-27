@@ -1,5 +1,4 @@
 # streakfeed-ios
-=========================
 
 Project for Spire Streaks Feed Challenge
 
