@@ -23,6 +23,7 @@ Project for Spire Streaks Feed Challenge
 * Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server, which will be an issue for very large amounts of data. Should spend some time optimizing
 * tableview optimizations - Used some open source to pull some data in background, but the tableview still slightly lags when scrolling, so there are some expensive calls are still occurring in the main thread. Will optimize later.
 * architecture restructure - View Controller can use some decoupling. A lot of logic can be moved elsewhere.
+* localization - currently, no string localization.
 
 ##Demo
 ![demo](assets/demo.gif)
