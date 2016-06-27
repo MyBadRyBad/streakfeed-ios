@@ -19,10 +19,10 @@ Project for Spire Streaks Feed Challenge
 * Proper Code Documentation - Currently no documentation in code.
 * Local Test Data - Currently pulling from REST server and using that as my sole data source.
 * Error handling - Currently displaying a generic error message for all errors
-* Data Persistence - Currently no data persistence. App needs to always pull data from the server. 
+* Data Persistence - Currently no data persistence, and no caching. App needs to always pull data from the server. 
 * Switch between Production, Staging, and Development URLS
 * Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server, which will be an issue for very large amounts of data. Should spend some time optimizing
-* tableview optimizations - Used some open source to pull some data in background, but the tableview still slightly lags when scrolling, so some expensive calls are still occurring in the main thread.
+* tableview optimizations - Used some open source to pull some data in background, but the tableview still slightly lags when scrolling, so there are some expensive calls are still occurring in the main thread. Will optimize later.
 
 ##Demo
 ![demo](assets/demo.gif)
