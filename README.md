@@ -24,5 +24,5 @@ Project for Spire Streaks Feed Challenge
 * Error handling - Currently displaying a generic error message for all errors
 * Data Persistence - Currently no data persistence. App needs to always pull data from the server. 
 * Switch between Production, Staging, and Development URLS
-* Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server. Should spend some time optimizing
-* tableview optimizations - Used some open source to pull some data in background. Should figure out some more ways to lazy load data.
+* Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server, which will be an issue for very large amounts of data. Should spend some time optimizing
+* tableview optimizations - Used some open source to pull some data in background, but there are definitely some ways to allow for more efficient lazy loading. 
