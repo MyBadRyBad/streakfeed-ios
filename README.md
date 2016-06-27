@@ -14,7 +14,7 @@ Project for Spire Streaks Feed Challenge
 ![mockup](assets/iOS_challenge_v1_mock_up.png)
 
 ##TODO for Production
-* Unit Testing - I started building and writing code as I went along.
+* Unit Testing - I started building and writing code as I went along. Need to write some tests
 * Proper Code Documentation - Currently no documentation in code.
 * Local Test Data - Currently pulling from REST server and using that as my sole data source.
 * Error handling - Currently displaying a generic error message for all errors
@@ -22,6 +22,7 @@ Project for Spire Streaks Feed Challenge
 * Switch between Production, Staging, and Development URLS
 * Data Model Optimizations - Currently a lot of calculations to organize data after pulling from the server, which will be an issue for very large amounts of data. Should spend some time optimizing
 * tableview optimizations - Used some open source to pull some data in background, but the tableview still slightly lags when scrolling, so there are some expensive calls are still occurring in the main thread. Will optimize later.
+* architecture restructure - View Controller can use some decoupling. A lot of logic can be moved elsewhere.
 
 ##Demo
 ![demo](assets/demo.gif)
